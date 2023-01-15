@@ -6,6 +6,7 @@ class ProductCard extends StatelessWidget {
   final Product product;
   final Function(Product)? onTap;
   const ProductCard({
+    super.key, 
     required this.product,
     this.onTap,
   });
