@@ -1,5 +1,6 @@
 import 'screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   const app = ECommerceApp();
@@ -11,6 +12,9 @@ class ECommerceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: GoogleFonts.getFont('Poppins').fontFamily,
+      ),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );

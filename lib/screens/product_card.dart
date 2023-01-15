@@ -24,8 +24,8 @@ class ProductCard extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                blurRadius: 10,
+                color: Colors.black.withOpacity(0.10),
+                blurRadius: 5,
               ),
             ],
             borderRadius: BorderRadius.circular(8),
@@ -65,7 +65,8 @@ class ProductCard extends StatelessWidget {
                     ),
                     Text(
                       product.description,
-                      maxLines: 2,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     )
                   ],
                 ),
