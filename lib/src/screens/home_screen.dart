@@ -1,10 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:ecommerce_flutter_app/src/home/product_details.dart';
+import 'package:ecommerce_flutter_app/src/screens/product_details.dart';
 import 'package:flutter/material.dart';
 
-import 'models/product.dart';
-import 'models/product_list.dart';
+import '../../models/product.dart';
+import '../../models/product_list.dart';
 import 'product_card.dart';
 
 class HomeScreen extends StatelessWidget {
