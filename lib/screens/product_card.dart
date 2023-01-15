@@ -15,7 +15,7 @@ class ProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap != null ? onTap!(product) : null,
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
+        padding: const EdgeInsets.only(bottom: 12.0),
         child: Container(
           width: double.infinity,
           height: 80,
