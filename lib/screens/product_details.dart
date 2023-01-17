@@ -15,7 +15,6 @@ class ProductDetails extends StatelessWidget {
             CustomScrollView(
               slivers: <Widget>[
                 SliverAppBar(
-                  // backgroundColor: const Color(0xff3C79F5),
                   backgroundColor: Colors.white,
                   stretch: true,
                   pinned: true,
@@ -23,7 +22,7 @@ class ProductDetails extends StatelessWidget {
                   floating: false,
                   expandedHeight: 160.0,
                   flexibleSpace: FlexibleSpaceBar(
-                    title: const Text(''),
+                    title: const Text(' '),
                     background: Image.asset(
                       product.imageUrlDt,
                       fit: BoxFit.fitHeight,
@@ -41,7 +40,7 @@ class ProductDetails extends StatelessWidget {
                             product.name,
                             style: const TextStyle(
                               fontSize: 30,
-                              color: Color(0xff363636),
+                              color: Color(0xff121212),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -49,11 +48,58 @@ class ProductDetails extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text(
-                          product.descriptionDt,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff363636)
+                        Container(
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(200, 134, 214, 254),
+                            borderRadius: BorderRadius.circular(10.00),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 134, 214, 254),
+                              width: 3,
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromARGB(200, 134, 214, 254),
+                                  blurRadius: 3,
+                                  spreadRadius: 0.5),
+                            ],
+                          ),
+                          padding: const EdgeInsets.all(10.00),
+                          child: Text(
+                            product.descriptionDt,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Color(0xff363636),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(200, 60, 245, 91),
+                            borderRadius: BorderRadius.circular(10.00),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 60, 245, 91),
+                              width: 3,
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromARGB(200, 134, 214, 254),
+                                  blurRadius: 3,
+                                  spreadRadius: 0.5),
+                            ],
+                          ),
+                          padding: const EdgeInsets.all(10),
+                          child: Center(
+                            child: Text(
+                              '\$${product.price.round()}',
+                              style: const TextStyle(
+                                fontSize: 50,
+                                color: Color(0xff363636),
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -74,9 +120,19 @@ class ProductDetails extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff2DCDDF),
                 ),
-                child: const Text(
-                  "Acquista",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.shopping_cart),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "A C Q U I S T A",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
               ),
             )
@@ -92,9 +148,11 @@ class ProductDetails extends StatelessWidget {
       builder: ((context) {
         return AlertDialog(
           title: const Text("Acquisto completato"),
+          content: Text('Hai speso \$${product.price.round()}'),
           actions: [
             TextButton(
-                onPressed: (() => Navigator.pop(context)), child: const Text("Ok"))
+                onPressed: (() => Navigator.pop(context)),
+                child: const Text("Ok"))
           ],
         );
       }),
