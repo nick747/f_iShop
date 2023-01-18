@@ -5,6 +5,8 @@ class ProductDetails extends StatelessWidget {
   Product product;
   ProductDetails({super.key, required this.product});
 
+  final fontColor = 0xff121212;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +40,9 @@ class ProductDetails extends StatelessWidget {
                         Center(
                           child: Text(
                             product.name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 30,
-                              color: Color(0xff121212),
+                              color: Color(fontColor),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -66,9 +68,9 @@ class ProductDetails extends StatelessWidget {
                           padding: const EdgeInsets.all(10.00),
                           child: Text(
                             product.descriptionDt,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
-                              color: Color(0xff363636),
+                              color: Color(fontColor),
                             ),
                           ),
                         ),
@@ -95,9 +97,9 @@ class ProductDetails extends StatelessWidget {
                           child: Center(
                             child: Text(
                               '\$${product.price.round()}',
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 50,
-                                color: Color(0xff363636),
+                                color: Color(fontColor),
                               ),
                             ),
                           ),
