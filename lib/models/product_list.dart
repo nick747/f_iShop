@@ -7,7 +7,8 @@ List<Product> productList = [
     "L'iPhone 14 Pro Max è uno dei modelli di fascia alta della linea iPhone 2022. Ha un display XDR da 6,7 pollici, fotocamera principale tripla, processore A16 Bionic, 5G, Face ID, ricarica wireless, ultimo sistema operativo iOS ed è resistente all'acqua.",
     1099,
     'assets/images/i14pm.png',
-    'assets/images/i14pm_dt.png'
+    'assets/images/i14pm_dt.png',
+    false
   ),
   Product(
     'iPhone 14 Pro',
@@ -16,6 +17,7 @@ List<Product> productList = [
     999,
     'assets/images/i14p.jpg',
     'assets/images/i14p_dt.png',
+    false
   ),
   Product(
     'iPhone 14 Plus',
@@ -24,6 +26,7 @@ List<Product> productList = [
     899,
     'assets/images/i14pl.png',
     'assets/images/i14pl_dt.png',
+    false
   ),
   Product(
     'iPhone 14',
@@ -32,6 +35,7 @@ List<Product> productList = [
     799,
     'assets/images/i14.jpg',
     'assets/images/i14_dt.png',
+    false
   ),
   Product(
     'iPhone 13 Mini',
@@ -40,6 +44,7 @@ List<Product> productList = [
     599,
     'assets/images/i13mini.png',
     'assets/images/i13mini_dt.png',
+    false
   ),
   Product(
     'iPhone 13',
@@ -48,6 +53,7 @@ List<Product> productList = [
     699,
     'assets/images/i13.jpg',
     'assets/images/i13_dt.png',
+    false
   ),
   Product(
     'iPhone 12',
@@ -56,6 +62,7 @@ List<Product> productList = [
     599,
     'assets/images/i12.png',
     'assets/images/i12_dt.png',
+    false
   ),
   Product(
     'iPhone SE 2020',
@@ -63,6 +70,7 @@ List<Product> productList = [
     "L'iPhone SE (seconda generazione) è uno smartphone più economico di Apple con caratteristiche simili a quelle dei modelli di fascia alta. Include un display da 4,7 pollici, fotocamera principale da 12MP, processore A15 Bionic, Touch ID, ricarica wireless e il sistema operativo iOS 16. È stato presentato il 15 aprile 2020 e messo in vendita a partire dallo stesso giorno.",
     429,
     'assets/images/ise.png',
-    'assets/images/ise_dt.png'
+    'assets/images/ise_dt.png',
+    false
   ),
 ];

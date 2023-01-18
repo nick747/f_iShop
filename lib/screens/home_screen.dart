@@ -7,20 +7,80 @@ import '../models/product.dart';
 import '../models/product_list.dart';
 import 'product_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool showStarred = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('iShop'),
+        title: Row(
+          children: [
+            const Text("iShop"),
+            const Spacer(),
+            IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Aiuto'),
+                      content: const Text(
+                          'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotto clicca sulla stellina in alto a destra nella schermata principale.'),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: const Text('Close'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              icon: const Icon(Icons.help),
+            )
+          ],
+        ),
         centerTitle: true,
         backgroundColor: const Color(0xff3C79F5),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 3, bottom: 8, left: 8, right: 8),
         child: SingleChildScrollView(
           child: Column(
-            children: buildProductCards(productList, context),
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  showStarred
+                      ? const Text("Preferiti")
+                      : const Text("Prodotti"),
+                  IconButton(
+                    icon: Icon(showStarred ? Icons.star : Icons.star_outline),
+                    onPressed: () {
+                      showStarred = !showStarred;
+                      setState(() {});
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children:
+                      buildProductCards(productList, context, showStarred),
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -28,23 +88,25 @@ class HomeScreen extends StatelessWidget {
   }
 
   List<ProductCard> buildProductCards(
-      List<Product> productList, BuildContext context) {
+      List<Product> productList, BuildContext context, bool showStarred) {
     List<ProductCard> productCards = [];
     for (var product in productList) {
-      final productCard = ProductCard(
-          product: product,
-          onTap: (product) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProductDetails(
-                  product: product,
+      if (!showStarred || (showStarred && product.starred)) {
+        final productCard = ProductCard(
+            product: product,
+            onTap: (product) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProductDetails(
+                    product: product,
+                  ),
                 ),
-              ),
-            );
-          });
+              );
+            });
 
-      productCards.add(productCard);
+        productCards.add(productCard);
+      }
     }
 
     return productCards;

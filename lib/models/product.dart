@@ -5,6 +5,7 @@ class Product {
   final double price;
   final String imageUrl;
   final String imageUrlDt;
+  bool starred;
 
   Product(
     this.name,
@@ -13,5 +14,6 @@ class Product {
     this.price,
     this.imageUrl,
     this.imageUrlDt,
+    this.starred,
   );
 }

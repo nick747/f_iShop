@@ -1,10 +1,15 @@
 import 'package:ecommerce_flutter_app/models/product.dart';
 import 'package:flutter/material.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   Product product;
   ProductDetails({super.key, required this.product});
 
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
   final fontColor = 0xff121212;
 
   @override
@@ -26,7 +31,7 @@ class ProductDetails extends StatelessWidget {
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text(' '),
                     background: Image.asset(
-                      product.imageUrlDt,
+                      widget.product.imageUrlDt,
                       fit: BoxFit.fitHeight,
                     ),
                   ),
@@ -39,7 +44,7 @@ class ProductDetails extends StatelessWidget {
                       children: [
                         Center(
                           child: Text(
-                            product.name,
+                            widget.product.name,
                             style: TextStyle(
                               fontSize: 30,
                               color: Color(fontColor),
@@ -67,7 +72,7 @@ class ProductDetails extends StatelessWidget {
                           ),
                           padding: const EdgeInsets.all(10.00),
                           child: Text(
-                            product.descriptionDt,
+                            widget.product.descriptionDt,
                             style: TextStyle(
                               fontSize: 18,
                               color: Color(fontColor),
@@ -96,7 +101,7 @@ class ProductDetails extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                           child: Center(
                             child: Text(
-                              '\$${product.price.round()}',
+                              '\$${widget.product.price.round()}',
                               style: TextStyle(
                                 fontSize: 50,
                                 color: Color(fontColor),
@@ -115,26 +120,51 @@ class ProductDetails extends StatelessWidget {
               left: 16,
               right: 16,
               height: 50,
-              child: ElevatedButton(
-                onPressed: () => checkout(context),
-                onLongPress: () => easterEgg(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff2DCDDF),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.shopping_cart),
-                    SizedBox(
-                      width: 10,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: ElevatedButton(
+                      onPressed: () => checkout(context),
+                      onLongPress: () => easterEgg(context),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(8),
+                        backgroundColor: const Color(0xff2DCDDF),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.shopping_cart),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "A C Q U I S T A",
+                            style:
+                                TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
-                    Text(
-                      "A C Q U I S T A",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        widget.product.starred = !widget.product.starred;
+                        setState(() {});
+                      } ,
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(12),
+                        backgroundColor: const Color.fromARGB(255, 224, 248, 11),
+                      ),
+                      child: widget.product.starred ? const Icon(Icons.star) : const Icon(Icons.star_outline),
+                      ),
                     ),
-                  ],
-                ),
+                ],
               ),
             )
           ],
@@ -149,7 +179,7 @@ class ProductDetails extends StatelessWidget {
       builder: ((context) {
         return AlertDialog(
           title: const Text("Acquisto completato"),
-          content: Text('Hai speso \$${product.price.round()}'),
+          content: Text('Hai speso \$${widget.product.price.round()}'),
           actions: [
             TextButton(
                 onPressed: (() => Navigator.pop(context)),
@@ -159,6 +189,7 @@ class ProductDetails extends StatelessWidget {
       }),
     );
   }
+
   easterEgg(BuildContext context) {
     showDialog(
       context: context,
