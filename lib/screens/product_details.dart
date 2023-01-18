@@ -116,9 +116,8 @@ class ProductDetails extends StatelessWidget {
               right: 16,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {
-                  checkout(context);
-                },
+                onPressed: () => checkout(context),
+                onLongPress: () => easterEgg(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xff2DCDDF),
                 ),
@@ -151,6 +150,22 @@ class ProductDetails extends StatelessWidget {
         return AlertDialog(
           title: const Text("Acquisto completato"),
           content: Text('Hai speso \$${product.price.round()}'),
+          actions: [
+            TextButton(
+                onPressed: (() => Navigator.pop(context)),
+                child: const Text("Ok"))
+          ],
+        );
+      }),
+    );
+  }
+  easterEgg(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: const Text("Easter Egg"),
+          content: const Text('Hai trovato l\'easter egg, complimenti'),
           actions: [
             TextButton(
                 onPressed: (() => Navigator.pop(context)),
