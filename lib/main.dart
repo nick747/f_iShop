@@ -13,7 +13,8 @@ class ECommerceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: GoogleFonts.getFont('Poppins').fontFamily,
+        // fontFamily: GoogleFonts.getFont('Poppins').fontFamily,
+        fontFamily: 'Poppins',
       ),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),

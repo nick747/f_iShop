@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import '../models/product.dart';
@@ -6,7 +8,7 @@ class ProductCard extends StatelessWidget {
   final Product product;
   final Function(Product)? onTap;
   const ProductCard({
-    super.key, 
+    super.key,
     required this.product,
     this.onTap,
   });
@@ -59,9 +61,7 @@ class ProductCard extends StatelessWidget {
                     Text(
                       product.name,
                       style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                          fontSize: 18, fontWeight: FontWeight.w600),
                     ),
                     Text(
                       product.description,
@@ -85,9 +85,10 @@ class ProductCard extends StatelessWidget {
                     child: Text(
                       '\$${product.price.round()}',
                       style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w900),
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
