@@ -1,4 +1,5 @@
 import 'screens/home_screen.dart';
+import 'screens/app.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +18,7 @@ class ECommerceApp extends StatelessWidget {
         fontFamily: 'Poppins',
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: App(),
     );
   }
 }

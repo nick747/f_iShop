@@ -8,6 +8,7 @@ List<Product> productList = [
     1099,
     'assets/images/i14pm.png',
     'assets/images/i14pm_dt.png',
+    false,
     false
   ),
   Product(
@@ -17,6 +18,7 @@ List<Product> productList = [
     999,
     'assets/images/i14p.jpg',
     'assets/images/i14p_dt.png',
+    false,
     false
   ),
   Product(
@@ -26,6 +28,7 @@ List<Product> productList = [
     899,
     'assets/images/i14pl.png',
     'assets/images/i14pl_dt.png',
+    false,
     false
   ),
   Product(
@@ -35,6 +38,7 @@ List<Product> productList = [
     799,
     'assets/images/i14.jpg',
     'assets/images/i14_dt.png',
+    false,
     false
   ),
   Product(
@@ -44,6 +48,7 @@ List<Product> productList = [
     599,
     'assets/images/i13mini.png',
     'assets/images/i13mini_dt.png',
+    false,
     false
   ),
   Product(
@@ -53,6 +58,7 @@ List<Product> productList = [
     699,
     'assets/images/i13.jpg',
     'assets/images/i13_dt.png',
+    false,
     false
   ),
   Product(
@@ -62,6 +68,7 @@ List<Product> productList = [
     599,
     'assets/images/i12.png',
     'assets/images/i12_dt.png',
+    false,
     false
   ),
   Product(
@@ -71,6 +78,7 @@ List<Product> productList = [
     429,
     'assets/images/ise.png',
     'assets/images/ise_dt.png',
+    false,
     false
   ),
 ];

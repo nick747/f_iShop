@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter_app/models/product.dart';
 import 'package:flutter/material.dart';
+import '../models/cart_list.dart';
 
 class ProductDetails extends StatefulWidget {
   Product product;
@@ -125,7 +126,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Expanded(
                     flex: 4,
                     child: ElevatedButton(
-                      onPressed: () => checkout(context),
+                      onPressed: () {
+                        checkout(context);
+                        widget.product.bought = true;
+                        cart.add(widget.product);
+                        setState(() {});
+                      } ,
                       onLongPress: () => easterEgg(context),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.all(8),

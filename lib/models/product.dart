@@ -6,6 +6,7 @@ class Product {
   final String imageUrl;
   final String imageUrlDt;
   bool starred;
+  bool bought;
 
   Product(
     this.name,
@@ -15,5 +16,6 @@ class Product {
     this.imageUrl,
     this.imageUrlDt,
     this.starred,
+    this.bought,
   );
 }

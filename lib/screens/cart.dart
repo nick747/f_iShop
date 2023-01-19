@@ -4,16 +4,15 @@ import 'package:ecommerce_flutter_app/screens/product_details.dart';
 import 'package:flutter/material.dart';
 
 import '../models/product.dart';
-import '../models/product_list.dart';
+import '../models/cart_list.dart';
 import 'product_card.dart';
 
-
-class HomeScreen extends StatefulWidget {
+class CartScreen extends StatefulWidget {
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<CartScreen> createState() => _CartScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _CartScreenState extends State<CartScreen> {
   bool showStarred = false;
 
   @override
@@ -28,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   showStarred
-                      ? const Text("Preferiti")
+                      ? const Text("Carrello")
                       : const Text("Prodotti"),
                   IconButton(
                     icon: Icon(showStarred ? Icons.star : Icons.star_outline),
@@ -45,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SingleChildScrollView(
                 child: Column(
                   children:
-                      buildProductCards(productList, context, showStarred),
+                      buildProductCards(cart, context, showStarred),
                 ),
               ),
             ],
@@ -59,22 +58,20 @@ class _HomeScreenState extends State<HomeScreen> {
       List<Product> productList, BuildContext context, bool showStarred) {
     List<ProductCard> productCards = [];
     for (var product in productList) {
-      if (!showStarred || (showStarred && product.starred)) {
-        final productCard = ProductCard(
-            product: product,
-            onTap: (product) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ProductDetails(
-                    product: product,
-                  ),
+      final productCard = ProductCard(
+          product: product,
+          onTap: (product) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductDetails(
+                  product: product,
                 ),
-              );
-            });
+              ),
+            );
+          });
 
-        productCards.add(productCard);
-      }
+      productCards.add(productCard);
     }
 
     return productCards;
