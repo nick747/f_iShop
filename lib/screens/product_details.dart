@@ -127,9 +127,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     flex: 4,
                     child: ElevatedButton(
                       onPressed: () {
-                        checkout(context);
-                        widget.product.bought = true;
-                        cart.add(widget.product);
+                        widget.product.bought ? rimuovi() : aggiungi();                               
+                        widget.product.bought = !widget.product.bought;
                         setState(() {});
                       } ,
                       onLongPress: () => easterEgg(context),
@@ -139,15 +138,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(Icons.shopping_cart),
-                          SizedBox(
+                        children: [
+                          Icon(widget.product.bought ? Icons.remove_shopping_cart : Icons.shopping_cart),
+                          const SizedBox(
                             width: 10,
                           ),
-                          Text(
-                            "A C Q U I S T A",
+                          Text( widget.product.bought ? "R I M U O V I" : "A C Q U I S T A",
                             style:
-                                TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -179,7 +177,7 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  checkout(BuildContext context) {
+  acquisto(BuildContext context) {
     showDialog(
       context: context,
       builder: ((context) {
@@ -194,6 +192,33 @@ class _ProductDetailsState extends State<ProductDetails> {
         );
       }),
     );
+  }
+
+  rimborso(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: const Text("Rimozione Completata"),
+          content: Text('Hai rimosso ${widget.product.name} dal tuo carrello'),
+          actions: [
+            TextButton(
+                onPressed: (() => Navigator.pop(context)),
+                child: const Text("Ok"))
+          ],
+        );
+      }),
+    );
+  }
+
+  aggiungi() {
+    acquisto(context);
+    cart.add(widget.product);
+  }
+
+  rimuovi() {
+    rimborso(context);
+    cart.remove(widget.product);
   }
 
   easterEgg(BuildContext context) {

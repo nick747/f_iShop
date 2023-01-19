@@ -70,11 +70,11 @@ class _AppState extends State<App> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.square),
-            label: 'Products',
+            label: 'Prodotti',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
-            label: 'Cart',
+            label: 'Carrello',
           ),
         ],
       ),

@@ -27,8 +27,8 @@ class _CartScreenState extends State<CartScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   showStarred
-                      ? const Text("Carrello")
-                      : const Text("Prodotti"),
+                      ? const Text("Preferiti")
+                      : const Text("Carrello"),
                   IconButton(
                     icon: Icon(showStarred ? Icons.star : Icons.star_outline),
                     onPressed: () {
