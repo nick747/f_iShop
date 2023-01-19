@@ -31,15 +31,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                   expandedHeight: 160.0,
                   flexibleSpace: FlexibleSpaceBar(
                     title: const Text(' '),
-                    background: Image.asset(
-                      widget.product.imageUrlDt,
-                      fit: BoxFit.fitHeight,
+                    background: Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Image.asset(
+                        widget.product.imageUrlDt,
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
                   ),
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 10, right: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -57,21 +60,47 @@ class _ProductDetailsState extends State<ProductDetails> {
                           height: 20,
                         ),
                         Container(
+                          width: double.infinity,
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(200, 134, 214, 254),
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(10.00),
                             border: Border.all(
-                              color: const Color.fromARGB(255, 134, 214, 254),
-                              width: 3,
+                              color: const Color.fromARGB(255, 60, 245, 91),
+                              width: 2.5,
                             ),
                             boxShadow: const [
                               BoxShadow(
                                   color: Color.fromARGB(200, 134, 214, 254),
-                                  blurRadius: 3,
-                                  spreadRadius: 0.5),
+                                  blurRadius: 5,
+                                  spreadRadius: 0.05),
                             ],
                           ),
-                          padding: const EdgeInsets.all(10.00),
+                          padding: const EdgeInsets.all(10),
+                          child: Center(
+                            child: Text(
+                              '\$${widget.product.price.round()}',
+                              style: const TextStyle(
+                                fontSize: 50,
+                                color: Color(0xff3CEB6C),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.00),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromARGB(255, 197, 196, 196),
+                                  blurRadius: 5,
+                                  spreadRadius: 0.05),
+                            ],
+                          ),
+                          padding: const EdgeInsets.all(12.00),
                           child: Text(
                             widget.product.descriptionDt,
                             style: TextStyle(
@@ -80,36 +109,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(200, 60, 245, 91),
-                            borderRadius: BorderRadius.circular(10.00),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 60, 245, 91),
-                              width: 3,
-                            ),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromARGB(200, 134, 214, 254),
-                                  blurRadius: 3,
-                                  spreadRadius: 0.5),
-                            ],
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          child: Center(
-                            child: Text(
-                              '\$${widget.product.price.round()}',
-                              style: TextStyle(
-                                fontSize: 50,
-                                color: Color(fontColor),
-                              ),
-                            ),
-                          ),
-                        ),
+                        
                       ],
                     ),
                   ),
@@ -125,27 +125,36 @@ class _ProductDetailsState extends State<ProductDetails> {
                 children: [
                   Expanded(
                     flex: 4,
-                    child: ElevatedButton(
+                    child: OutlinedButton(
                       onPressed: () {
-                        widget.product.bought ? rimuovi() : aggiungi();                               
+                        widget.product.bought ? rimuovi() : aggiungi();
                         widget.product.bought = !widget.product.bought;
                         setState(() {});
-                      } ,
+                      },
                       onLongPress: () => easterEgg(context),
                       style: ElevatedButton.styleFrom(
+                        side: const BorderSide(
+                          color: Color(0xff2DCDDF),
+                          width: 3.0,
+                        ),
                         padding: const EdgeInsets.all(8),
-                        backgroundColor: const Color(0xff2DCDDF),
+                        // backgroundColor: const ,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(widget.product.bought ? Icons.remove_shopping_cart : Icons.shopping_cart),
+                          Icon(widget.product.bought
+                              ? Icons.remove_shopping_cart
+                              : Icons.shopping_cart, color: const Color(0xff2DCDDF),),
                           const SizedBox(
                             width: 10,
                           ),
-                          Text( widget.product.bought ? "R I M U O V I" : "A C Q U I S T A",
-                            style:
-                                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          Text(
+                            widget.product.bought
+                                ? "R I M U O V I"
+                                : "A C Q U I S T A",
+                            style: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff2DCDDF)),
                           ),
                         ],
                       ),
@@ -156,18 +165,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: ElevatedButton(
+                    child: OutlinedButton(
                       onPressed: () {
                         widget.product.starred = !widget.product.starred;
                         setState(() {});
-                      } ,
+                      },
                       style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.all(12),
-                        backgroundColor: const Color.fromARGB(255, 224, 248, 11),
+                        side: const BorderSide(
+                          color: Color(0xffF1E930),
+                          width: 3.0,
+                        ),
+                        padding: const EdgeInsets.all(11),
                       ),
-                      child: widget.product.starred ? const Icon(Icons.star) : const Icon(Icons.star_outline),
-                      ),
+                      child: widget.product.starred
+                          ? const Icon(Icons.star, color: Color(0xffF1E930),)
+                          : const Icon(Icons.star_outline, color: Color(0xffF1E930)),
                     ),
+                  ),
                 ],
               ),
             )
