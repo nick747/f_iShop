@@ -40,7 +40,7 @@ class _AppState extends State<App> {
                     return AlertDialog(
                       title: const Text('Aiuto'),
                       content: const Text(
-                          'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotto clicca sulla stellina in alto a destra nella schermata principale.'),
+                          'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.'),
                       actions: <Widget>[
                         ElevatedButton(
                           child: const Text('Close'),
