@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'cart.dart';
 
-var appBarColor = 0xff3C79F5;
+var appBarColor = 0xff2155A2;
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -13,16 +13,16 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int _currentIndex = 0;
-    static List<Widget> pages = <Widget>[
-      HomeScreen(),
-      CartScreen(),
-    ];
+  static List<Widget> pages = <Widget>[
+    HomeScreen(),
+    CartScreen(),
+  ];
 
-    void _onItemTapped(int index) {
-      setState(() {
-        _currentIndex = index;
-      });
-    }
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,15 @@ class _AppState extends State<App> {
       appBar: AppBar(
         title: Row(
           children: [
-            const Text("iShop"),
+            const Text(
+              "iShop",
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
             const Spacer(),
-            IconButton(
+            TextButton(
+              child: const Text(
+                "Help",
+              ),
               onPressed: () {
                 showDialog(
                   context: context,
@@ -53,16 +59,13 @@ class _AppState extends State<App> {
                   },
                 );
               },
-              icon: const Icon(Icons.help),
-            )
+            ),
           ],
         ),
         centerTitle: true,
         backgroundColor: Color(appBarColor),
       ),
-
       body: pages[_currentIndex],
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
