@@ -15,7 +15,7 @@ class ECommerceApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         // fontFamily: GoogleFonts.getFont('Poppins').fontFamily,
-        fontFamily: 'Poppins',
+        fontFamily: 'Overpass',
       ),
       debugShowCheckedModeBanner: false,
       home: App(),

@@ -55,15 +55,15 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   fonts:
-      - family: Poppins
+      - family: Overpass
         fonts:
-          - asset: assets/fonts/Poppins/Poppins-Regular.ttf
-          - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+          - asset: assets/fonts/Overpass/Overpass-Regular.ttf
+          - asset: assets/fonts/Overpass/Overpass-Bold.ttf
             weight: 700
-          - asset: assets/fonts/Poppins/Poppins-SemiBold.ttf
+          - asset: assets/fonts/Overpass/Overpass-SemiBold.ttf
             weight: 600
             # style: semibold
-          - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+          - asset: assets/fonts/Overpass/Overpass-Medium.ttf
             weight: 500
             # style: medium
 
