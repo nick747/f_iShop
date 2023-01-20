@@ -26,9 +26,13 @@ class _CartScreenState extends State<CartScreen> {
               const SizedBox(
                 height: 10,
               ),
-              const NuovoPrezzo(),
+              const PrezzoCarrello(),
               const SizedBox(
-                height: 15,
+                height: 5,
+              ),
+              const Divider(),
+              const SizedBox(
+                height: 10,
               ),
               SingleChildScrollView(
                 child: Column(
@@ -65,74 +69,8 @@ class _CartScreenState extends State<CartScreen> {
     return productCards;
   }
 }
-
 class PrezzoCarrello extends StatelessWidget {
   const PrezzoCarrello({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.00),
-          border: Border.all(
-            color: const Color(0xff06D6A0),
-            width: 2.5,
-          ),
-          boxShadow: const [
-            BoxShadow(
-                color: Color.fromARGB(200, 134, 214, 254),
-                blurRadius: 5,
-                spreadRadius: 0.05),
-          ],
-        ),
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${cart.length}',
-                    style: const TextStyle(
-                        fontSize: 32, fontWeight: FontWeight.w500),
-                  ),
-                  const Text(
-                    'Prodotti',
-                    style: TextStyle(fontSize: 15),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                color: const Color(0xff06D6A0),
-                // width: double.infinity,
-                child: Center(
-                  child: Text(
-                    '\$${sumPrices(cart).round()}',
-                    style: const TextStyle(
-                        fontSize: 50,
-                        color: Color(0xff3CEB6C),
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
-}
-
-class NuovoPrezzo extends StatelessWidget {
-  const NuovoPrezzo({
     Key? key,
   }) : super(key: key);
 
@@ -189,7 +127,7 @@ class NuovoPrezzo extends StatelessWidget {
                 style: const TextStyle(
                     fontSize: 50,
                     color: Colors.white,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w600),
               ),
             ),
           ),
