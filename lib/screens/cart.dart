@@ -39,12 +39,15 @@ class _CartScreenState extends State<CartScreen> {
                 ],
               ),
               const SizedBox(
-                height: 5,
+                height: 10,
+              ),
+              const prezzoCarrello(),
+              const SizedBox(
+                height: 15,
               ),
               SingleChildScrollView(
                 child: Column(
-                  children:
-                      buildProductCards(cart, context, showStarred),
+                  children: buildProductCards(cart, context, showStarred),
                 ),
               ),
             ],
@@ -76,4 +79,65 @@ class _CartScreenState extends State<CartScreen> {
 
     return productCards;
   }
+}
+
+class prezzoCarrello extends StatelessWidget {
+  const prezzoCarrello({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.00),
+          border: Border.all(
+            color: const Color.fromARGB(255, 60, 245, 91),
+            width: 2.5,
+          ),
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromARGB(200, 134, 214, 254),
+                blurRadius: 5,
+                spreadRadius: 0.05),
+          ],
+        ),
+        padding: const EdgeInsets.all(10),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${cart.length}',
+                    style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    'Prodotti',
+                    style: TextStyle(fontSize: 15),
+                  )
+                ],
+              ),
+              Center(
+                child: Text('\$${sumPrices(cart).round()}', style: const TextStyle(fontSize: 50, color: Color(0xff3CEB6C), fontWeight: FontWeight.w500),),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+double sumPrices(List<Product> list) {
+  double sum = 0;
+
+  for (int i = 0; i < list.length; i++) {
+    sum += list[i].price;
+  }
+
+  return sum;
 }

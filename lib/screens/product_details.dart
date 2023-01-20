@@ -82,6 +82,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               style: const TextStyle(
                                 fontSize: 50,
                                 color: Color(0xff3CEB6C),
+                                fontWeight: FontWeight.w500
                               ),
                             ),
                           ),
