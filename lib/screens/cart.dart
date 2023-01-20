@@ -23,25 +23,10 @@ class _CartScreenState extends State<CartScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  showStarred
-                      ? const Text("Preferiti")
-                      : const Text("Carrello"),
-                  IconButton(
-                    icon: Icon(showStarred ? Icons.star : Icons.star_outline),
-                    onPressed: () {
-                      showStarred = !showStarred;
-                      setState(() {});
-                    },
-                  ),
-                ],
-              ),
               const SizedBox(
                 height: 10,
               ),
-              const prezzoCarrello(),
+              const NuovoPrezzo(),
               const SizedBox(
                 height: 15,
               ),
@@ -81,8 +66,8 @@ class _CartScreenState extends State<CartScreen> {
   }
 }
 
-class prezzoCarrello extends StatelessWidget {
-  const prezzoCarrello({
+class PrezzoCarrello extends StatelessWidget {
+  const PrezzoCarrello({
     Key? key,
   }) : super(key: key);
 
@@ -94,7 +79,7 @@ class prezzoCarrello extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.00),
           border: Border.all(
-            color: const Color.fromARGB(255, 60, 245, 91),
+            color: const Color(0xff06D6A0),
             width: 2.5,
           ),
           boxShadow: const [
@@ -105,17 +90,18 @@ class prezzoCarrello extends StatelessWidget {
           ],
         ),
         padding: const EdgeInsets.all(10),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 1,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '${cart.length}',
-                    style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                        fontSize: 32, fontWeight: FontWeight.w500),
                   ),
                   const Text(
                     'Prodotti',
@@ -123,12 +109,93 @@ class prezzoCarrello extends StatelessWidget {
                   )
                 ],
               ),
-              Center(
-                child: Text('\$${sumPrices(cart).round()}', style: const TextStyle(fontSize: 50, color: Color(0xff3CEB6C), fontWeight: FontWeight.w500),),
+            ),
+            Expanded(
+              flex: 3,
+              child: Container(
+                color: const Color(0xff06D6A0),
+                // width: double.infinity,
+                child: Center(
+                  child: Text(
+                    '\$${sumPrices(cart).round()}',
+                    style: const TextStyle(
+                        fontSize: 50,
+                        color: Color(0xff3CEB6C),
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ));
+  }
+}
+
+class NuovoPrezzo extends StatelessWidget {
+  const NuovoPrezzo({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Container(
+            padding: const EdgeInsets.all(9),
+            decoration: BoxDecoration(
+              color: Colors.white,
+                border: Border.all(
+                  color: const Color(0xff06D6A0),
+                  width: 2.7,
+                ),
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    bottomLeft: Radius.circular(10))),
+            child: Center(
+              child: Column(
+                children: [
+                  Text(
+                    '${cart.length}',
+                    style: const TextStyle(
+                        fontSize: 32, fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    'Prodotti',
+                    style: TextStyle(fontSize: 15),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 5,
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color(0xff06D6A0),
+                  width: 2.5,
+                ),
+                color: const Color(0xff06D6A0),
+                borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10))),
+            child: Center(
+              child: Text(
+                '\$${sumPrices(cart).round()}',
+                style: const TextStyle(
+                    fontSize: 50,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
 

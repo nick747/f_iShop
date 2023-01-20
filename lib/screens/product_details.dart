@@ -65,7 +65,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10.00),
                             border: Border.all(
-                              color: const Color.fromARGB(255, 60, 245, 91),
+                              color: const Color(0xff06D6A0),
                               width: 2.5,
                             ),
                             boxShadow: const [
@@ -81,7 +81,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               '\$${widget.product.price.round()}',
                               style: const TextStyle(
                                 fontSize: 50,
-                                color: Color(0xff3CEB6C),
+                                color: Color(0xff06D6A0),
                                 fontWeight: FontWeight.w500
                               ),
                             ),
@@ -135,7 +135,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       onLongPress: () => easterEgg(context),
                       style: ElevatedButton.styleFrom(
                         side: const BorderSide(
-                          color: Color(0xff2DCDDF),
+                          color: Color(0xff118AB2),
                           width: 3.0,
                         ),
                         padding: const EdgeInsets.all(8),
@@ -146,7 +146,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         children: [
                           Icon(widget.product.bought
                               ? Icons.remove_shopping_cart
-                              : Icons.shopping_cart, color: const Color(0xff2DCDDF),),
+                              : Icons.shopping_cart, color: const Color(0xff118AB2),),
                           const SizedBox(
                             width: 10,
                           ),
@@ -155,7 +155,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ? "R I M U O V I"
                                 : "A C Q U I S T A",
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff2DCDDF)),
+                                fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff118AB2)),
                           ),
                         ],
                       ),
@@ -173,14 +173,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                       },
                       style: ElevatedButton.styleFrom(
                         side: const BorderSide(
-                          color: Color(0xffF1E930),
+                          color: Color(0xffFFD166),
                           width: 3.0,
                         ),
                         padding: const EdgeInsets.all(11),
                       ),
                       child: widget.product.starred
-                          ? const Icon(Icons.star, color: Color(0xffF1E930),)
-                          : const Icon(Icons.star_outline, color: Color(0xffF1E930)),
+                          ? const Icon(Icons.star, color: Color(0xffFFD166),)
+                          : const Icon(Icons.star_outline, color: Color(0xffFFD166)),
                     ),
                   ),
                 ],
