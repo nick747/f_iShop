@@ -28,8 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   showStarred
-                      ? const Text("Preferiti")
-                      : const Text("Prodotti"),
+                      ? const Text("Preferiti", style: TextStyle(fontFamily: 'Overpass',),)
+                      : const Text("Prodotti", style: TextStyle(fontFamily: 'Overpass',)),
                   IconButton(
                     icon: Icon(showStarred ? Icons.star : Icons.star_outline),
                     onPressed: () {

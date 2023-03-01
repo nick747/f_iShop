@@ -42,7 +42,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 10, right: 10),
+                    padding: const EdgeInsets.only(
+                        top: 8.0, bottom: 8, left: 10, right: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -53,6 +54,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               fontSize: 30,
                               color: Color(fontColor),
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Overpass',
                             ),
                           ),
                         ),
@@ -82,7 +84,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                               style: const TextStyle(
                                 fontSize: 50,
                                 color: Color(0xff06D6A0),
-                                fontWeight: FontWeight.w500
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Overpass',
                               ),
                             ),
                           ),
@@ -107,10 +110,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                             style: TextStyle(
                               fontSize: 18,
                               color: Color(fontColor),
+                              fontFamily: 'Overpass',
                             ),
                           ),
                         ),
-                        
                       ],
                     ),
                   ),
@@ -144,9 +147,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(widget.product.bought
-                              ? Icons.remove_shopping_cart
-                              : Icons.shopping_cart, color: const Color(0xff118AB2),),
+                          Icon(
+                            widget.product.bought
+                                ? Icons.remove_shopping_cart
+                                : Icons.shopping_cart,
+                            color: const Color(0xff118AB2),
+                          ),
                           const SizedBox(
                             width: 10,
                           ),
@@ -155,7 +161,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ? "R I M U O V I"
                                 : "A C Q U I S T A",
                             style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff118AB2)),
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(
+                                0xff118AB2,
+                              ),
+                              fontFamily: 'Overpass',
+                            ),
                           ),
                         ],
                       ),
@@ -179,8 +191,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                         padding: const EdgeInsets.all(11),
                       ),
                       child: widget.product.starred
-                          ? const Icon(Icons.star, color: Color(0xffFFD166),)
-                          : const Icon(Icons.star_outline, color: Color(0xffFFD166)),
+                          ? const Icon(
+                              Icons.star,
+                              color: Color(0xffFFD166),
+                            )
+                          : const Icon(Icons.star_outline,
+                              color: Color(0xffFFD166)),
                     ),
                   ),
                 ],

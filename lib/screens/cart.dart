@@ -69,6 +69,7 @@ class _CartScreenState extends State<CartScreen> {
     return productCards;
   }
 }
+
 class PrezzoCarrello extends StatelessWidget {
   const PrezzoCarrello({
     Key? key,
@@ -83,7 +84,7 @@ class PrezzoCarrello extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(9),
             decoration: BoxDecoration(
-              color: Colors.white,
+                color: Colors.white,
                 border: Border.all(
                   color: const Color(0xff06D6A0),
                   width: 2.7,
@@ -97,11 +98,17 @@ class PrezzoCarrello extends StatelessWidget {
                   Text(
                     '${cart.length}',
                     style: const TextStyle(
-                        fontSize: 32, fontWeight: FontWeight.w500),
+                      fontSize: 32,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Overpass',
+                    ),
                   ),
                   const Text(
                     'Prodotti',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: 'Overpass',
+                    ),
                   )
                 ],
               ),
@@ -125,9 +132,11 @@ class PrezzoCarrello extends StatelessWidget {
               child: Text(
                 '\$${sumPrices(cart).round()}',
                 style: const TextStyle(
-                    fontSize: 50,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
+                  fontSize: 50,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Overpass',
+                ),
               ),
             ),
           ),

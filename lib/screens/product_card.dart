@@ -61,12 +61,13 @@ class ProductCard extends StatelessWidget {
                     Text(
                       product.name,
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w600),
+                          fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Overpass',),
                     ),
                     Text(
                       product.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontFamily: 'Overpass',),
                     )
                   ],
                 ),
@@ -88,6 +89,7 @@ class ProductCard extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.w700,
+                        fontFamily: 'Overpass',
                       ),
                     ),
                   ),

@@ -32,24 +32,44 @@ class _AppState extends State<App> {
           children: [
             const Text(
               "iShop",
-              style: TextStyle(fontWeight: FontWeight.w700),
+              style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                  fontFamily: 'Overpass'),
             ),
             const Spacer(),
             TextButton(
               child: const Text(
                 "Help",
+                style: TextStyle(
+                    color: Color.fromRGBO(255, 255, 255, 0.5),
+                    fontFamily: 'Overpass'),
               ),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: const Text('Aiuto'),
+                      title: const Text(
+                        'Aiuto',
+                        style: TextStyle(
+                          fontFamily: 'Overpass',
+                        ),
+                      ),
                       content: const Text(
-                          'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.'),
+                        'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.',
+                        style: TextStyle(
+                          fontFamily: 'Overpass',
+                        ),
+                      ),
                       actions: <Widget>[
                         ElevatedButton(
-                          child: const Text('Close'),
+                          child: const Text(
+                            'Close',
+                            style: TextStyle(
+                              fontFamily: 'Overpass',
+                            ),
+                          ),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
