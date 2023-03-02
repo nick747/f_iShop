@@ -18,8 +18,16 @@ Future initSettings() async {
   );
 }
 
-class ECommerceApp extends StatelessWidget {
+class ECommerceApp extends StatefulWidget {
   const ECommerceApp({super.key});
+
+  @override
+  State<ECommerceApp> createState() => _ECommerceAppState();
+}
+
+class _ECommerceAppState extends State<ECommerceApp> {
+
+  var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
 
   @override
   Widget build(BuildContext context) {

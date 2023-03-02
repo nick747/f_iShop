@@ -1,10 +1,11 @@
-import 'dart:ui';
-
+import 'package:ecommerce_flutter_app/screens/app.dart';
 import 'package:flutter/material.dart';
-
 import '../models/product.dart';
 
-class ProductCard extends StatelessWidget {
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import '../screens/settings.dart';
+
+class ProductCard extends StatefulWidget {
   final Product product;
   final Function(Product)? onTap;
   const ProductCard({
@@ -14,9 +15,17 @@ class ProductCard extends StatelessWidget {
   });
 
   @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+
+  var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onTap != null ? onTap!(product) : null,
+      onTap: () => widget.onTap != null ? widget.onTap!(widget.product) : null,
       child: Padding(
         padding: const EdgeInsets.only(bottom: 12.0),
         child: Container(
@@ -31,7 +40,7 @@ class ProductCard extends StatelessWidget {
               ),
             ],
             borderRadius: BorderRadius.circular(8),
-            color: Colors.white,
+            color: darkMode ? Color(secondaryColor) : Colors.white,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +54,7 @@ class ProductCard extends StatelessWidget {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(8)),
                   child: Image.asset(
-                    product.imageUrl,
+                    widget.product.imageUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -59,12 +68,12 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      product.name,
+                      widget.product.name,
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Overpass',),
                     ),
                     Text(
-                      product.description,
+                      widget.product.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontFamily: 'Overpass',),
@@ -80,11 +89,11 @@ class ProductCard extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: const Color(0xff06D6A0),
+                    color: darkMode ? const Color(0xff030303) : const Color(0xff06D6A0),
                   ),
                   child: Center(
                     child: Text(
-                      '\$${product.price.round()}',
+                      '\$${widget.product.price.round()}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,

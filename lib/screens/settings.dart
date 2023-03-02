@@ -2,22 +2,24 @@ import 'package:ecommerce_flutter_app/screens/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsPage extends StatefulWidget {
   final Function() notifySettingsChange;
-  const SettingsScreen({
+  const SettingsPage({
     Key? key,
     required this.notifySettingsChange,
   }) : super(key: key);
 
   @override
-  _SettingsScreenState createState() => _SettingsScreenState();
+  _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
   }
+
+  // var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               fontFamily: 'Overpass',
             ),
           ),
-          backgroundColor: Color(appBarColor),
+          backgroundColor: (Settings.getValue<bool>('darkMode', defaultValue: false))! ? Color(secondaryColor) : Color(appBarColor),
         ),
         body: SafeArea(
           child: ListView(
@@ -80,6 +82,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
                 selected: 0,
                 onChange: (value) {
+                  setState(() {});
                   widget.notifySettingsChange();
                 },
               ),

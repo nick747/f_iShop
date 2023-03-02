@@ -1,6 +1,9 @@
 import 'package:ecommerce_flutter_app/models/product.dart';
+import 'package:ecommerce_flutter_app/screens/app.dart';
 import 'package:flutter/material.dart';
 import '../models/cart_list.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import '../screens/settings.dart';
 
 class ProductDetails extends StatefulWidget {
   Product product;
@@ -11,198 +14,201 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  final fontColor = 0xff121212;
+  var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                  backgroundColor: Colors.white,
-                  stretch: true,
-                  pinned: true,
-                  snap: false,
-                  floating: false,
-                  expandedHeight: 160.0,
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: const Text(' '),
-                    background: Padding(
-                      padding: const EdgeInsets.only(top: 2),
-                      child: Image.asset(
-                        widget.product.imageUrlDt,
-                        fit: BoxFit.fitHeight,
+    return MaterialApp(
+      theme: darkMode ? ThemeData.dark(useMaterial3: true) : ThemeData.light(useMaterial3: true),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    backgroundColor: Colors.transparent,
+                    stretch: true,
+                    pinned: true,
+                    snap: false,
+                    floating: false,
+                    expandedHeight: 160.0,
+                    flexibleSpace: FlexibleSpaceBar(
+                      title: const Text(' '),
+                      background: Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Image.asset(
+                          widget.product.imageUrlDt,
+                          fit: BoxFit.fitHeight,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8.0, bottom: 8, left: 10, right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Text(
-                            widget.product.name,
-                            style: TextStyle(
-                              fontSize: 30,
-                              color: Color(fontColor),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: 'Overpass',
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.00),
-                            border: Border.all(
-                              color: const Color(0xff06D6A0),
-                              width: 2.5,
-                            ),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromARGB(200, 134, 214, 254),
-                                  blurRadius: 5,
-                                  spreadRadius: 0.05),
-                            ],
-                          ),
-                          padding: const EdgeInsets.all(10),
-                          child: Center(
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 8.0, bottom: 8, left: 10, right: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
                             child: Text(
-                              '\$${widget.product.price.round()}',
-                              style: const TextStyle(
-                                fontSize: 50,
-                                color: Color(0xff06D6A0),
-                                fontWeight: FontWeight.w500,
+                              widget.product.name,
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: darkMode ? Color(secondaryTColor) : Color(primaryTColor),
+                                fontWeight: FontWeight.bold,
                                 fontFamily: 'Overpass',
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.00),
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Color.fromARGB(255, 197, 196, 196),
-                                  blurRadius: 5,
-                                  spreadRadius: 0.05),
-                            ],
+                          const SizedBox(
+                            height: 20,
                           ),
-                          padding: const EdgeInsets.all(12.00),
-                          child: Text(
-                            widget.product.descriptionDt,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color(fontColor),
-                              fontFamily: 'Overpass',
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: darkMode ? Color(secondaryColor) : Color(primaryColor),
+                              borderRadius: BorderRadius.circular(10.00),
+                              border: Border.all(
+                                color: const Color(0xff06D6A0),
+                                width: 2.5,
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(100, 134, 214, 254),
+                                    blurRadius: 5,
+                                    spreadRadius: .05),
+                              ],
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: Center(
+                              child: Text(
+                                '\$${widget.product.price.round()}',
+                                style: const TextStyle(
+                                  fontSize: 50,
+                                  color: Color(0xff06D6A0),
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Overpass',
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Positioned(
-              bottom: 40,
-              left: 16,
-              right: 16,
-              height: 50,
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 4,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        widget.product.bought ? rimuovi() : aggiungi();
-                        widget.product.bought = !widget.product.bought;
-                        setState(() {});
-                      },
-                      onLongPress: () => easterEgg(context),
-                      style: ElevatedButton.styleFrom(
-                        side: const BorderSide(
-                          color: Color(0xff118AB2),
-                          width: 3.0,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        // backgroundColor: const ,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            widget.product.bought
-                                ? Icons.remove_shopping_cart
-                                : Icons.shopping_cart,
-                            color: const Color(0xff118AB2),
-                          ),
                           const SizedBox(
-                            width: 10,
+                            height: 20,
                           ),
-                          Text(
-                            widget.product.bought
-                                ? "R I M U O V I"
-                                : "A C Q U I S T A",
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Color(
-                                0xff118AB2,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: darkMode ? Color(secondaryColor) : Color(primaryColor),
+                              borderRadius: BorderRadius.circular(10.00),
+                              boxShadow: const [
+                                BoxShadow(
+                                    color: Color.fromARGB(100, 197, 196, 196),
+                                    blurRadius: 5,
+                                    spreadRadius: 0.05),
+                              ],
+                            ),
+                            padding: const EdgeInsets.all(12.00),
+                            child: Text(
+                              widget.product.descriptionDt,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: darkMode ? Color(secondaryTColor) : Color(primaryTColor),
+                                fontFamily: 'Overpass',
                               ),
-                              fontFamily: 'Overpass',
                             ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: OutlinedButton(
-                      onPressed: () {
-                        widget.product.starred = !widget.product.starred;
-                        setState(() {});
-                      },
-                      style: ElevatedButton.styleFrom(
-                        side: const BorderSide(
-                          color: Color(0xffFFD166),
-                          width: 3.0,
-                        ),
-                        padding: const EdgeInsets.all(11),
-                      ),
-                      child: widget.product.starred
-                          ? const Icon(
-                              Icons.star,
-                              color: Color(0xffFFD166),
-                            )
-                          : const Icon(Icons.star_outline,
-                              color: Color(0xffFFD166)),
-                    ),
-                  ),
+                  )
                 ],
               ),
-            )
-          ],
+              Positioned(
+                bottom: 40,
+                left: 16,
+                right: 16,
+                height: 50,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          widget.product.bought ? rimuovi() : aggiungi();
+                          widget.product.bought = !widget.product.bought;
+                          setState(() {});
+                        },
+                        onLongPress: () => easterEgg(context),
+                        style: ElevatedButton.styleFrom(
+                          side: const BorderSide(
+                            color: Color(0xff118AB2),
+                            width: 3.0,
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          // backgroundColor: const ,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              widget.product.bought
+                                  ? Icons.remove_shopping_cart
+                                  : Icons.shopping_cart,
+                              color: const Color(0xff118AB2),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              widget.product.bought
+                                  ? "R I M U O V I"
+                                  : "A C Q U I S T A",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Color(
+                                  0xff118AB2,
+                                ),
+                                fontFamily: 'Overpass',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          widget.product.starred = !widget.product.starred;
+                          setState(() {});
+                        },
+                        style: ElevatedButton.styleFrom(
+                          side: const BorderSide(
+                            color: Color(0xffFFD166),
+                            width: 3.0,
+                          ),
+                          padding: const EdgeInsets.all(11),
+                        ),
+                        child: widget.product.starred
+                            ? const Icon(
+                                Icons.star,
+                                color: Color(0xffFFD166),
+                              )
+                            : const Icon(Icons.star_outline,
+                                color: Color(0xffFFD166)),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'cart.dart';
 import 'settings.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 var appBarColor = 0xff2155A2;
-var primaryColor = 0xffFFFF;
+var primaryColor = 0xFFFFFFFF;
 var secondaryColor = 0xff121212;
 var primaryTColor = 0xff121212;
-var secondaryTColor = 0xffFFFF;
+var secondaryTColor = 0xFFFFFFFF;
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -28,14 +29,8 @@ class _AppState extends State<App> {
     pages = <Widget>[
       HomeScreen(),
       CartScreen(),
-      SettingsScreen(notifySettingsChange: () => {setState(() {})}),
+      SettingsPage(notifySettingsChange: () => {setState(() {})}),
     ];
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 
   @override
@@ -43,8 +38,14 @@ class _AppState extends State<App> {
     return Scaffold(
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: (Settings.getValue<bool>('darkMode', defaultValue: false))! ? Color(secondaryColor) : Color(primaryColor),
+        unselectedItemColor: (Settings.getValue<bool>('darkMode', defaultValue: false))! ? Color(primaryColor) : Colors.grey,
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+          onTap: (index) => {
+            setState(() {
+              _currentIndex = index;
+            })
+          },
         selectedItemColor: Color(appBarColor),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
