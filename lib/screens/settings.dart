@@ -63,8 +63,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SwitchSettingsTile(
-                title: 'Use Material 3',
-                leading: const Icon(Icons.outlined_flag),
+                title: 'Modern Style',
+                leading: const Icon(Icons.style),
                 defaultValue: true,
                 settingKey: 'material3',
                 onChange: (value) {

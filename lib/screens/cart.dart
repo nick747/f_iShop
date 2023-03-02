@@ -9,7 +9,6 @@ import 'product_card.dart';
 import 'settings.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
-
 class CartScreen extends StatefulWidget {
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -19,14 +18,21 @@ class _CartScreenState extends State<CartScreen> {
   bool showStarred = false;
 
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+  var material3 = (Settings.getValue<bool>('material3', defaultValue: false))!;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkMode ? ThemeData.dark(useMaterial3: true) : ThemeData.light(useMaterial3: true),
+      theme: darkMode
+          ? ThemeData.dark(
+              useMaterial3: material3 ? true : false,
+            )
+          : ThemeData.light(
+              useMaterial3: material3 ? true : false,
+            ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-              appBar: AppBar(
+        appBar: AppBar(
           title: Row(
             children: [
               const Text(
@@ -82,9 +88,9 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
           centerTitle: true,
-          backgroundColor: darkMode ? Color(secondaryColor) : Color(appBarColor),
+          backgroundColor:
+              darkMode ? Color(secondaryColor) : Color(appBarColor),
         ),
-    
         body: Padding(
           padding: const EdgeInsets.only(top: 3, bottom: 8, left: 8, right: 8),
           child: SingleChildScrollView(
@@ -148,7 +154,6 @@ class PrezzoCarrello extends StatefulWidget {
 }
 
 class _PrezzoCarrelloState extends State<PrezzoCarrello> {
-
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
 
   @override
@@ -162,7 +167,9 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
             decoration: BoxDecoration(
                 color: Colors.transparent,
                 border: Border.all(
-                  color: darkMode ? Color(secondaryColor) : const Color(0xff06D6A0),
+                  color: darkMode
+                      ? Color(secondaryColor)
+                      : const Color(0xff06D6A0),
                   width: 3,
                 ),
                 borderRadius: const BorderRadius.only(
@@ -197,10 +204,13 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
                 border: Border.all(
-                color: darkMode ? Color(secondaryColor) : const Color(0xff06D6A0),
+                  color: darkMode
+                      ? Color(secondaryColor)
+                      : const Color(0xff06D6A0),
                   width: 2.5,
                 ),
-                color: darkMode ? Color(secondaryColor) : const Color(0xff06D6A0),
+                color:
+                    darkMode ? Color(secondaryColor) : const Color(0xff06D6A0),
                 borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(10),
                     bottomRight: Radius.circular(10))),

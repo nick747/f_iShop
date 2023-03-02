@@ -18,14 +18,21 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showStarred = false;
 
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+  var material3 = (Settings.getValue<bool>('material3', defaultValue: false))!;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkMode ? ThemeData.dark(useMaterial3: true) : ThemeData.light(useMaterial3: true),
+      theme: darkMode
+          ? ThemeData.dark(
+              useMaterial3: material3 ? true : false,
+            )
+          : ThemeData.light(
+              useMaterial3: material3 ? true : false,
+            ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-              appBar: AppBar(
+        appBar: AppBar(
           title: Row(
             children: [
               const Text(
@@ -81,9 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           centerTitle: true,
-          backgroundColor: darkMode ? Color(secondaryColor) : Color(appBarColor),
+          backgroundColor:
+              darkMode ? Color(secondaryColor) : Color(appBarColor),
         ),
-    
         body: Padding(
           padding: const EdgeInsets.only(top: 3, bottom: 8, left: 8, right: 8),
           child: SingleChildScrollView(
@@ -93,8 +100,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     showStarred
-                        ? const Text("Preferiti", style: TextStyle(fontFamily: 'Overpass',),)
-                        : const Text("Prodotti", style: TextStyle(fontFamily: 'Overpass',)),
+                        ? const Text(
+                            "Preferiti",
+                            style: TextStyle(
+                              fontFamily: 'Overpass',
+                            ),
+                          )
+                        : const Text("Prodotti",
+                            style: TextStyle(
+                              fontFamily: 'Overpass',
+                            )),
                     IconButton(
                       icon: Icon(showStarred ? Icons.star : Icons.star_outline),
                       onPressed: () {
