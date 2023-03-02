@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: ListView(
             children: [
               SwitchSettingsTile(
-                title: 'Dark Mode',
+                title: 'Modalità Scura',
                 leading: const Icon(Icons.dark_mode),
                 defaultValue: false,
                 settingKey: 'darkMode',
@@ -63,7 +63,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SwitchSettingsTile(
-                title: 'Modern Style',
+                title: 'Stile Moderno',
                 leading: const Icon(Icons.style),
                 defaultValue: true,
                 settingKey: 'material3',

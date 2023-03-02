@@ -21,6 +21,7 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
 
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+  var value = (Settings.getValue<int>('usedValue', defaultValue: 0))!;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,8 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   child: Center(
                     child: Text(
-                      '\$${widget.product.price.round()}',
+                      (value == 0) ? '\$${widget.product.price_dollar.round()}' : ((value == 1) ? '€${widget.product.price_euro.round()}' : '£${widget.product.price_pound.round()}'),
+                      //'\$${widget.product.price.round()}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,

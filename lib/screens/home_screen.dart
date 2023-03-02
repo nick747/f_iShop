@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool showStarred = false;
 
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
-  var material3 = (Settings.getValue<bool>('material3', defaultValue: false))!;
+  var material3 = (Settings.getValue<bool>('material3', defaultValue: true))!;
 
   @override
   Widget build(BuildContext context) {

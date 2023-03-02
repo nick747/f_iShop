@@ -15,11 +15,19 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+  var material3 = (Settings.getValue<bool>('material3', defaultValue: true))!;
+  var value = (Settings.getValue<int>('usedValue', defaultValue: 0))!;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkMode ? ThemeData.dark(useMaterial3: true) : ThemeData.light(useMaterial3: true),
+      theme: darkMode
+          ? ThemeData.dark(
+              useMaterial3: material3 ? true : false,
+            )
+          : ThemeData.light(
+              useMaterial3: material3 ? true : false,
+            ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
@@ -57,7 +65,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                               widget.product.name,
                               style: TextStyle(
                                 fontSize: 30,
-                                color: darkMode ? Color(secondaryTColor) : Color(primaryTColor),
+                                color: darkMode
+                                    ? Color(secondaryTColor)
+                                    : Color(primaryTColor),
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Overpass',
                               ),
@@ -69,7 +79,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
-                              color: darkMode ? Color(secondaryColor) : Color(primaryColor),
+                              color: darkMode
+                                  ? Color(secondaryColor)
+                                  : Color(primaryColor),
                               borderRadius: BorderRadius.circular(10.00),
                               border: Border.all(
                                 color: const Color(0xff06D6A0),
@@ -85,7 +97,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                             padding: const EdgeInsets.all(10),
                             child: Center(
                               child: Text(
-                                '\$${widget.product.price.round()}',
+                                (value == 0)
+                                    ? '\$${widget.product.price_dollar.round()}'
+                                    : ((value == 1)
+                                        ? '€${widget.product.price_euro.round()}'
+                                        : '£${widget.product.price_pound.round()}'),
                                 style: const TextStyle(
                                   fontSize: 50,
                                   color: Color(0xff06D6A0),
@@ -100,7 +116,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              color: darkMode ? Color(secondaryColor) : Color(primaryColor),
+                              color: darkMode
+                                  ? Color(secondaryColor)
+                                  : Color(primaryColor),
                               borderRadius: BorderRadius.circular(10.00),
                               boxShadow: const [
                                 BoxShadow(
@@ -114,7 +132,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                               widget.product.descriptionDt,
                               style: TextStyle(
                                 fontSize: 18,
-                                color: darkMode ? Color(secondaryTColor) : Color(primaryTColor),
+                                color: darkMode
+                                    ? Color(secondaryTColor)
+                                    : Color(primaryTColor),
                                 fontFamily: 'Overpass',
                               ),
                             ),
@@ -214,13 +234,15 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  acquisto(BuildContext context) {
+  acquisto(BuildContext context, int value) {
     showDialog(
       context: context,
       builder: ((context) {
         return AlertDialog(
           title: const Text("Acquisto completato"),
-          content: Text('Hai speso \$${widget.product.price.round()}'),
+          content: Text(
+            (value == 0) ? 'Hai speso \$${widget.product.price_dollar.round()}' : ((value == 1) ? 'Hai speso €${widget.product.price_euro.round()}' : 'Hai speso £${widget.product.price_pound.round()}'),
+          ),
           actions: [
             TextButton(
                 onPressed: (() => Navigator.pop(context)),
@@ -249,7 +271,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   aggiungi() {
-    acquisto(context);
+    acquisto(context, value);
     cart.add(widget.product);
   }
 

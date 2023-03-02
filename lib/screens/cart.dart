@@ -18,7 +18,7 @@ class _CartScreenState extends State<CartScreen> {
   bool showStarred = false;
 
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
-  var material3 = (Settings.getValue<bool>('material3', defaultValue: false))!;
+  var material3 = (Settings.getValue<bool>('material3', defaultValue: true))!;
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +155,7 @@ class PrezzoCarrello extends StatefulWidget {
 
 class _PrezzoCarrelloState extends State<PrezzoCarrello> {
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+  var value = (Settings.getValue<int>('usedValue', defaultValue: 0))!;
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +217,7 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
                     bottomRight: Radius.circular(10))),
             child: Center(
               child: Text(
-                '\$${sumPrices(cart).round()}',
+                (value == 0) ? '\$${sumPricesDollar(cart).round()}' : ((value == 1) ? '€${sumPricesEuro(cart).round()}' : '£${sumPricesPound(cart).round()}'),
                 style: const TextStyle(
                   fontSize: 50,
                   color: Colors.white,
@@ -232,11 +233,31 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
   }
 }
 
-double sumPrices(List<Product> list) {
+double sumPricesDollar(List<Product> list) {
   double sum = 0;
 
   for (int i = 0; i < list.length; i++) {
-    sum += list[i].price;
+    sum += list[i].price_dollar;
+  }
+
+  return sum;
+}
+
+double sumPricesEuro(List<Product> list) {
+  double sum = 0;
+
+  for (int i = 0; i < list.length; i++) {
+    sum += list[i].price_euro;
+  }
+
+  return sum;
+}
+
+double sumPricesPound(List<Product> list) {
+  double sum = 0;
+
+  for (int i = 0; i < list.length; i++) {
+    sum += list[i].price_pound;
   }
 
   return sum;
