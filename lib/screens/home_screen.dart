@@ -108,14 +108,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     showStarred
-                        ? const Text(
-                            "Preferiti",
-                            style: TextStyle(
+                        ? Text(
+                            (Settings.getValue<bool>("language", defaultValue: false))! ? "Favourites" : "Preferiti",
+                            style: const TextStyle(
                               fontFamily: 'Overpass',
                             ),
                           )
-                        : const Text("Prodotti",
-                            style: TextStyle(
+                        : Text(
+                            (Settings.getValue<bool>("language", defaultValue: false))! ? "Products" : "Prodotti",
+                            style: const TextStyle(
                               fontFamily: 'Overpass',
                             )),
                     IconButton(

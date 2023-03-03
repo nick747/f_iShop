@@ -5,6 +5,8 @@ import '../models/cart_list.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import '../screens/settings.dart';
 
+var langI = 0;
+
 class ProductDetails extends StatefulWidget {
   Product product;
   ProductDetails({super.key, required this.product});
@@ -21,6 +23,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
     return MaterialApp(
       theme: darkMode
           ? ThemeData.dark(
@@ -130,10 +133,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             padding: const EdgeInsets.all(12.00),
                             child: Text(
-                              (Settings.getValue<bool>("language",
-                                      defaultValue: false))!
-                                  ? widget.product.description_en
-                                  : widget.product.description,
+                              "${description[langI]?[widget.product.description]}",
                               style: TextStyle(
                                 fontSize: 18,
                                 color: darkMode

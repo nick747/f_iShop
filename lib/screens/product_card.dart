@@ -5,6 +5,7 @@ import '../models/product.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import '../screens/settings.dart';
 
+var langI = 0;
 class ProductCard extends StatefulWidget {
   final Product product;
   final Function(Product)? onTap;
@@ -25,6 +26,7 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
+    langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
     return GestureDetector(
       onTap: () => widget.onTap != null ? widget.onTap!(widget.product) : null,
       child: Padding(
@@ -74,7 +76,7 @@ class _ProductCardState extends State<ProductCard> {
                           fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Overpass',),
                     ),
                     Text(
-                      (Settings.getValue<bool>("language", defaultValue: false))! ? widget.product.description_en : widget.product.description,
+                      "${description[langI]?[widget.product.description]}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontFamily: 'Overpass',),
