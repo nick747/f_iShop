@@ -40,9 +40,9 @@ class _SettingsPageState extends State<SettingsPage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Settings",
-            style: TextStyle(
+          title: Text(
+            (Settings.getValue<bool>("language", defaultValue: false))! ? "Settings" : "Impostazioni",
+            style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Overpass',
             ),
@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: ListView(
             children: [
               SwitchSettingsTile(
-                title: 'Modalità Scura',
+                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "Dark Mode" : "Modalità Scura",
                 leading: const Icon(Icons.dark_mode),
                 defaultValue: false,
                 settingKey: 'darkMode',
@@ -63,7 +63,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SwitchSettingsTile(
-                title: 'Stile Moderno',
+                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "Modern Style" : "Stile Moderno",
                 leading: const Icon(Icons.style),
                 defaultValue: true,
                 settingKey: 'material3',
@@ -72,13 +72,23 @@ class _SettingsPageState extends State<SettingsPage> {
                   widget.notifySettingsChange();
                 },
               ),
+              SwitchSettingsTile(
+                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "English" : "Inglese",
+                leading: const Icon(Icons.language),
+                defaultValue: false,
+                settingKey: 'language',
+                onChange: (value) {
+                  setState(() {});
+                  widget.notifySettingsChange();
+                },
+              ),
               RadioSettingsTile<int>(
-                title: 'Valuta utilizzata',
+                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "Currency Used" : "Valuta Utilizzata",
                 settingKey: 'usedValue',
-                values: const <int, String>{
-                  0: '\$ Dollari',
-                  1: '€ Euro',
-                  2: '£ Sterline',
+                values: <int, String>{
+                  0: (Settings.getValue<bool>("language", defaultValue: false))! ? "\$ Dollars" : "\$ Dollari",
+                  1: (Settings.getValue<bool>("language", defaultValue: false))! ? "€ Euros" : "€ Euro",
+                  2: (Settings.getValue<bool>("language", defaultValue: false))! ? "£ Pounds" : "£ Sterline",
                 },
                 selected: 0,
                 onChange: (value) {
