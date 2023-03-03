@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'cart.dart';
+import 'settings.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 var appBarColor = 0xff2155A2;
+var primaryColor = 0xFFFFFFFF;
+var secondaryColor = 0xff121212;
+var primaryTColor = 0xff121212;
+var secondaryTColor = 0xFFFFFFFF;
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -13,62 +19,33 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   int _currentIndex = 0;
-  static List<Widget> pages = <Widget>[
-    HomeScreen(),
-    CartScreen(),
-  ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
+  static List<Widget> pages = <Widget>[];
+
+  @override
+  void initState() {
+    super.initState();
+
+    pages = <Widget>[
+      HomeScreen(),
+      CartScreen(),
+      SettingsPage(notifySettingsChange: () => {setState(() {})}),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            const Text(
-              "iShop",
-              style: TextStyle(fontWeight: FontWeight.w700),
-            ),
-            const Spacer(),
-            TextButton(
-              child: const Text(
-                "Help",
-              ),
-              onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: const Text('Aiuto'),
-                      content: const Text(
-                          'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.'),
-                      actions: <Widget>[
-                        ElevatedButton(
-                          child: const Text('Close'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            ),
-          ],
-        ),
-        centerTitle: true,
-        backgroundColor: Color(appBarColor),
-      ),
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: (Settings.getValue<bool>('darkMode', defaultValue: false))! ? Color(secondaryColor) : Color(primaryColor),
+        unselectedItemColor: (Settings.getValue<bool>('darkMode', defaultValue: false))! ? Color(primaryColor) : Colors.grey,
         currentIndex: _currentIndex,
-        onTap: _onItemTapped,
+          onTap: (index) => {
+            setState(() {
+              _currentIndex = index;
+            })
+          },
         selectedItemColor: Color(appBarColor),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -78,6 +55,10 @@ class _AppState extends State<App> {
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
             label: 'Carrello',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Impostazioni',
           ),
         ],
       ),

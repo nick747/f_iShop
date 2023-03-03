@@ -2,10 +2,12 @@
 
 import 'package:ecommerce_flutter_app/screens/product_details.dart';
 import 'package:flutter/material.dart';
-
+import 'app.dart';
 import '../models/product.dart';
 import '../models/cart_list.dart';
 import 'product_card.dart';
+import 'settings.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 class CartScreen extends StatefulWidget {
   @override
@@ -15,31 +17,103 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   bool showStarred = false;
 
+  var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+  var material3 = (Settings.getValue<bool>('material3', defaultValue: true))!;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 3, bottom: 8, left: 8, right: 8),
-        child: SingleChildScrollView(
-          child: Column(
+    return MaterialApp(
+      theme: darkMode
+          ? ThemeData.dark(
+              useMaterial3: material3 ? true : false,
+            )
+          : ThemeData.light(
+              useMaterial3: material3 ? true : false,
+            ),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Row(
             children: [
-              const SizedBox(
-                height: 10,
+              const Text(
+                "iShop",
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    fontFamily: 'Overpass'),
               ),
-              const PrezzoCarrello(),
-              const SizedBox(
-                height: 5,
-              ),
-              const Divider(),
-              const SizedBox(
-                height: 10,
-              ),
-              SingleChildScrollView(
-                child: Column(
-                  children: buildProductCards(cart, context, showStarred),
+              const Spacer(),
+              TextButton(
+                child: const Text(
+                  "Help",
+                  style: TextStyle(
+                      color: Color.fromRGBO(255, 255, 255, 0.5),
+                      fontFamily: 'Overpass'),
                 ),
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text(
+                          'Aiuto',
+                          style: TextStyle(
+                            fontFamily: 'Overpass',
+                          ),
+                        ),
+                        content: const Text(
+                          'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.',
+                          style: TextStyle(
+                            fontFamily: 'Overpass',
+                          ),
+                        ),
+                        actions: <Widget>[
+                          ElevatedButton(
+                            child: const Text(
+                              'Close',
+                              style: TextStyle(
+                                fontFamily: 'Overpass',
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
               ),
             ],
+          ),
+          centerTitle: true,
+          backgroundColor:
+              darkMode ? Color(secondaryColor) : Color(appBarColor),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 3, bottom: 8, left: 8, right: 8),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                const PrezzoCarrello(),
+                const SizedBox(
+                  height: 5,
+                ),
+                const Divider(),
+                const SizedBox(
+                  height: 10,
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: buildProductCards(cart, context, showStarred),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -69,10 +143,19 @@ class _CartScreenState extends State<CartScreen> {
     return productCards;
   }
 }
-class PrezzoCarrello extends StatelessWidget {
+
+class PrezzoCarrello extends StatefulWidget {
   const PrezzoCarrello({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<PrezzoCarrello> createState() => _PrezzoCarrelloState();
+}
+
+class _PrezzoCarrelloState extends State<PrezzoCarrello> {
+  var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
+  var value = (Settings.getValue<int>('usedValue', defaultValue: 0))!;
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +166,12 @@ class PrezzoCarrello extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(9),
             decoration: BoxDecoration(
-              color: Colors.white,
+                color: Colors.transparent,
                 border: Border.all(
-                  color: const Color(0xff06D6A0),
-                  width: 2.7,
+                  color: darkMode
+                      ? Color(secondaryColor)
+                      : const Color(0xff06D6A0),
+                  width: 3,
                 ),
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -97,11 +182,17 @@ class PrezzoCarrello extends StatelessWidget {
                   Text(
                     '${cart.length}',
                     style: const TextStyle(
-                        fontSize: 32, fontWeight: FontWeight.w500),
+                      fontSize: 32,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Overpass',
+                    ),
                   ),
                   const Text(
                     'Prodotti',
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontFamily: 'Overpass',
+                    ),
                   )
                 ],
               ),
@@ -114,20 +205,25 @@ class PrezzoCarrello extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
                 border: Border.all(
-                  color: const Color(0xff06D6A0),
+                  color: darkMode
+                      ? Color(secondaryColor)
+                      : const Color(0xff06D6A0),
                   width: 2.5,
                 ),
-                color: const Color(0xff06D6A0),
+                color:
+                    darkMode ? Color(secondaryColor) : const Color(0xff06D6A0),
                 borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(10),
                     bottomRight: Radius.circular(10))),
             child: Center(
               child: Text(
-                '\$${sumPrices(cart).round()}',
+                (value == 0) ? '\$${sumPricesDollar(cart).round()}' : ((value == 1) ? '€${sumPricesEuro(cart).round()}' : '£${sumPricesPound(cart).round()}'),
                 style: const TextStyle(
-                    fontSize: 50,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600),
+                  fontSize: 50,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Overpass',
+                ),
               ),
             ),
           ),
@@ -137,11 +233,31 @@ class PrezzoCarrello extends StatelessWidget {
   }
 }
 
-double sumPrices(List<Product> list) {
+double sumPricesDollar(List<Product> list) {
   double sum = 0;
 
   for (int i = 0; i < list.length; i++) {
-    sum += list[i].price;
+    sum += list[i].price_dollar;
+  }
+
+  return sum;
+}
+
+double sumPricesEuro(List<Product> list) {
+  double sum = 0;
+
+  for (int i = 0; i < list.length; i++) {
+    sum += list[i].price_euro;
+  }
+
+  return sum;
+}
+
+double sumPricesPound(List<Product> list) {
+  double sum = 0;
+
+  for (int i = 0; i < list.length; i++) {
+    sum += list[i].price_pound;
   }
 
   return sum;
