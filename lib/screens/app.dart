@@ -47,18 +47,18 @@ class _AppState extends State<App> {
             })
           },
         selectedItemColor: Color(appBarColor),
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.square),
-            label: 'Prodotti',
+            icon: const Icon(Icons.square),
+            label: (Settings.getValue<bool>("language", defaultValue: false))! ? 'Products' : "Prodotti",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Carrello',
+            icon: const Icon(Icons.shopping_cart),
+            label: (Settings.getValue<bool>("language", defaultValue: false))! ? 'Cart' : "Carrello",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Impostazioni',
+            icon: const Icon(Icons.settings),
+            label: (Settings.getValue<bool>("language", defaultValue: false))! ? 'Settings' : "Impostazioni",
           ),
         ],
       ),

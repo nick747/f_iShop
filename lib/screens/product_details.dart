@@ -17,6 +17,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
   var material3 = (Settings.getValue<bool>('material3', defaultValue: true))!;
   var value = (Settings.getValue<int>('usedValue', defaultValue: 0))!;
+  var language = (Settings.getValue<bool>("language", defaultValue: false))!;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +130,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             padding: const EdgeInsets.all(12.00),
                             child: Text(
-                              widget.product.description,
+                              (Settings.getValue<bool>("language",
+                                      defaultValue: false))!
+                                  ? widget.product.description_en
+                                  : widget.product.description,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: darkMode
@@ -182,9 +186,14 @@ class _ProductDetailsState extends State<ProductDetails> {
                               width: 10,
                             ),
                             Text(
-                              widget.product.bought
-                                  ? "R I M U O V I"
-                                  : "A C Q U I S T A",
+                              (Settings.getValue<bool>("language",
+                                      defaultValue: false))!
+                                  ? (widget.product.bought
+                                      ? "R E M O V E"
+                                      : "B U Y")
+                                  : (widget.product.bought
+                                      ? "R I M U O V I"
+                                      : "A C Q U I S T A"),
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -234,14 +243,24 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  acquisto(BuildContext context, int value) {
+  acquisto(BuildContext context, int value, bool language) {
     showDialog(
       context: context,
       builder: ((context) {
         return AlertDialog(
-          title: const Text("Acquisto completato"),
+          title: Text(language ? "Purchase completed" : "Acquisto completato"),
           content: Text(
-            (value == 0) ? 'Hai speso \$${widget.product.price_dollar.round()}' : ((value == 1) ? 'Hai speso €${widget.product.price_euro.round()}' : 'Hai speso £${widget.product.price_pound.round()}'),
+            language
+                ? ((value == 0)
+                    ? "You've spent \$${widget.product.price_dollar.round()}"
+                    : ((value == 1)
+                        ? "You've spent €${widget.product.price_euro.round()}"
+                        : "You've spent £${widget.product.price_pound.round()}"))
+                : ((value == 0)
+                    ? "Hai speso \$${widget.product.price_dollar.round()}"
+                    : ((value == 1)
+                        ? "Hai speso €${widget.product.price_euro.round()}"
+                        : "Hai speso £${widget.product.price_pound.round()}")),
           ),
           actions: [
             TextButton(
@@ -259,7 +278,11 @@ class _ProductDetailsState extends State<ProductDetails> {
       builder: ((context) {
         return AlertDialog(
           title: const Text("Rimozione Completata"),
-          content: Text('Hai rimosso ${widget.product.name} dal tuo carrello'),
+          content: Text(
+                      language
+                          ? "You've removed ${widget.product.name} from your cart"
+                          : "Hai rimosso ${widget.product.name} dal tuo carrello",
+                    ),
           actions: [
             TextButton(
                 onPressed: (() => Navigator.pop(context)),
@@ -271,7 +294,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   aggiungi() {
-    acquisto(context, value);
+    acquisto(context, value, language);
     cart.add(widget.product);
   }
 

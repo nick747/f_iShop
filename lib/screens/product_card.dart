@@ -74,7 +74,7 @@ class _ProductCardState extends State<ProductCard> {
                           fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Overpass',),
                     ),
                     Text(
-                      widget.product.description,
+                      (Settings.getValue<bool>("language", defaultValue: false))! ? widget.product.description_en : widget.product.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(fontFamily: 'Overpass',),

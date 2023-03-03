@@ -55,23 +55,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: const Text(
-                          'Aiuto',
-                          style: TextStyle(
+                        title: Text(
+                          (Settings.getValue<bool>("language",
+                                  defaultValue: false))!
+                              ? "Help"
+                              : 'Aiuto',
+                          style: const TextStyle(
                             fontFamily: 'Overpass',
                           ),
                         ),
-                        content: const Text(
-                          'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.',
-                          style: TextStyle(
+                        content: Text(
+                          (Settings.getValue<bool>("language",
+                                  defaultValue: false))!
+                              ? "Click on a product for more information. To save it, click on the star button. To filter your products, click on the star at the top right of the main screen."
+                              : 'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.',
+                          style: const TextStyle(
                             fontFamily: 'Overpass',
                           ),
                         ),
                         actions: <Widget>[
                           ElevatedButton(
-                            child: const Text(
-                              'Close',
-                              style: TextStyle(
+                            child: Text(
+                              (Settings.getValue<bool>("language", defaultValue: false))!
+                                  ? "Close"
+                                  : "Chiudi",
+                              style: const TextStyle(
                                 fontFamily: 'Overpass',
                               ),
                             ),
