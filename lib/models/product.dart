@@ -1,7 +1,7 @@
 class Product {
   final String name;
   final String description;
-  final String descriptionDt;
+  final String description_en;
   final double price_dollar;
   final double price_euro;
   final double price_pound;
@@ -13,7 +13,7 @@ class Product {
   Product(
     this.name,
     this.description,
-    this.descriptionDt,
+    this.description_en,
     this.price_dollar,
     this.price_euro,
     this.price_pound,

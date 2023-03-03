@@ -129,7 +129,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             padding: const EdgeInsets.all(12.00),
                             child: Text(
-                              widget.product.descriptionDt,
+                              widget.product.description,
                               style: TextStyle(
                                 fontSize: 18,
                                 color: darkMode
