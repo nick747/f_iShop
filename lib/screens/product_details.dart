@@ -6,7 +6,7 @@ import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import '../screens/settings.dart';
 
 var langI = 0;
-
+var priceI = 0;
 class ProductDetails extends StatefulWidget {
   Product product;
   ProductDetails({super.key, required this.product});
@@ -24,6 +24,13 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
+    if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 1) {
+      priceI = 1;
+    } else if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 2) {
+      priceI = 2;
+    } else {
+      priceI = 0;
+    }
     return MaterialApp(
       theme: darkMode
           ? ThemeData.dark(
@@ -101,11 +108,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             padding: const EdgeInsets.all(10),
                             child: Center(
                               child: Text(
-                                (value == 0)
-                                    ? '\$${widget.product.price_dollar.round()}'
-                                    : ((value == 1)
-                                        ? '€${widget.product.price_euro.round()}'
-                                        : '£${widget.product.price_pound.round()}'),
+                                '${price[priceI]?[widget.product.price]}',
                                 style: const TextStyle(
                                   fontSize: 50,
                                   color: Color(0xff06D6A0),
@@ -252,15 +255,15 @@ class _ProductDetailsState extends State<ProductDetails> {
           content: Text(
             language
                 ? ((value == 0)
-                    ? "You've spent \$${widget.product.price_dollar.round()}"
+                    ? "You've spent \$${price[priceI]?[widget.product.price]}"
                     : ((value == 1)
-                        ? "You've spent €${widget.product.price_euro.round()}"
-                        : "You've spent £${widget.product.price_pound.round()}"))
+                        ? "You've spent €${price[priceI]?[widget.product.price]}"
+                        : "You've spent £${price[priceI]?[widget.product.price]}"))
                 : ((value == 0)
-                    ? "Hai speso \$${widget.product.price_dollar.round()}"
+                    ? "Hai speso \$${price[priceI]?[widget.product.price]}"
                     : ((value == 1)
-                        ? "Hai speso €${widget.product.price_euro.round()}"
-                        : "Hai speso £${widget.product.price_pound.round()}")),
+                        ? "Hai speso €${price[priceI]?[widget.product.price]}"
+                        : "Hai speso £${price[priceI]?[widget.product.price]}")),
           ),
           actions: [
             TextButton(

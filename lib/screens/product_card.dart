@@ -6,6 +6,8 @@ import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import '../screens/settings.dart';
 
 var langI = 0;
+var priceI = 0;
+
 class ProductCard extends StatefulWidget {
   final Product product;
   final Function(Product)? onTap;
@@ -20,13 +22,19 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
   var value = (Settings.getValue<int>('usedValue', defaultValue: 0))!;
 
   @override
   Widget build(BuildContext context) {
     langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
+    if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 1) {
+      priceI = 1;
+    } else if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 2) {
+      priceI = 2;
+    } else {
+      priceI = 0;
+    }
     return GestureDetector(
       onTap: () => widget.onTap != null ? widget.onTap!(widget.product) : null,
       child: Padding(
@@ -73,13 +81,18 @@ class _ProductCardState extends State<ProductCard> {
                     Text(
                       widget.product.name,
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w600, fontFamily: 'Overpass',),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Overpass',
+                      ),
                     ),
                     Text(
                       "${description[langI]?[widget.product.description]}",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(fontFamily: 'Overpass',),
+                      style: const TextStyle(
+                        fontFamily: 'Overpass',
+                      ),
                     )
                   ],
                 ),
@@ -92,12 +105,13 @@ class _ProductCardState extends State<ProductCard> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: darkMode ? const Color(0xff030303) : const Color(0xff06D6A0),
+                    color: darkMode
+                        ? const Color(0xff030303)
+                        : const Color(0xff06D6A0),
                   ),
                   child: Center(
                     child: Text(
-                      (value == 0) ? '\$${widget.product.price_dollar.round()}' : ((value == 1) ? '€${widget.product.price_euro.round()}' : '£${widget.product.price_pound.round()}'),
-                      //'\$${widget.product.price.round()}',
+                      '${curPrices(priceI)}${price[priceI]?[widget.product.price]}',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
@@ -113,5 +127,9 @@ class _ProductCardState extends State<ProductCard> {
         ),
       ),
     );
+  }
+
+  String curPrices(int priceI) {
+    return ((priceI == 0) ? "\$" : ((priceI == 1) ? "€" : "£"));
   }
 }

@@ -9,6 +9,8 @@ import 'product_card.dart';
 import 'settings.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
+
+var priceI = 0;
 class CartScreen extends StatefulWidget {
   @override
   State<CartScreen> createState() => _CartScreenState();
@@ -22,6 +24,13 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 1) {
+      priceI = 1;
+    } else if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 2) {
+      priceI = 2;
+    } else {
+      priceI = 0;
+    }
     return MaterialApp(
       theme: darkMode
           ? ThemeData.dark(
@@ -217,7 +226,7 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
                     bottomRight: Radius.circular(10))),
             child: Center(
               child: Text(
-                (value == 0) ? '\$${sumPricesDollar(cart).round()}' : ((value == 1) ? '€${sumPricesEuro(cart).round()}' : '£${sumPricesPound(cart).round()}'),
+                "${curPrices(priceI)}${sumPrices(priceI).round()}",
                 style: const TextStyle(
                   fontSize: 50,
                   color: Colors.white,
@@ -233,32 +242,17 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
   }
 }
 
-double sumPricesDollar(List<Product> list) {
+double sumPrices(int priceI) {
   double sum = 0;
 
-  for (int i = 0; i < list.length; i++) {
-    sum += list[i].price_dollar;
+  for (int i = 0; i < price.length; i++) {
+    sum += price[priceI]![i];
   }
 
   return sum;
 }
 
-double sumPricesEuro(List<Product> list) {
-  double sum = 0;
 
-  for (int i = 0; i < list.length; i++) {
-    sum += list[i].price_euro;
-  }
-
-  return sum;
-}
-
-double sumPricesPound(List<Product> list) {
-  double sum = 0;
-
-  for (int i = 0; i < list.length; i++) {
-    sum += list[i].price_pound;
-  }
-
-  return sum;
+String curPrices(int priceI) {
+  return ((priceI == 0) ? "\$" : ((priceI == 1) ? "€" : "£"));
 }

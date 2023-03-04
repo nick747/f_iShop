@@ -21,12 +21,43 @@ var description = {
   ],
 };
 
+var price = {
+  0: [
+    1099,
+    999,
+    899,
+    799,
+    599,
+    699,
+    599,
+    429,
+  ],
+  1: [
+    1489,
+    1339,
+    1179,
+    1029,
+    839,
+    939,
+    839,
+    559,
+  ],
+  2: [
+    1199,
+    1099,
+    949,
+    849,
+    649,
+    749,
+    649,
+    449,
+  ],
+};
+
 class Product {
   final String name;
   final int description;
-  final double price_dollar;
-  final double price_euro;
-  final double price_pound;
+  final int price;
   final String imageUrl;
   final String imageUrlDt;
   bool starred;
@@ -35,9 +66,7 @@ class Product {
   Product(
     this.name,
     this.description,
-    this.price_dollar,
-    this.price_euro,
-    this.price_pound,
+    this.price,
     this.imageUrl,
     this.imageUrlDt,
     this.starred,
