@@ -111,20 +111,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     showStarred
-                        ? Text(
-                            (Settings.getValue<bool>("language",
-                                    defaultValue: false))!
-                                ? "Favourites"
-                                : "Preferiti",
+                        ? Text(getTextLanguage("favourites", (Settings.getValue<int>("lang", defaultValue: 0))!),
                             style: const TextStyle(
                               fontFamily: 'Overpass',
                             ),
                           )
-                        : Text(
-                            (Settings.getValue<bool>("language",
-                                    defaultValue: false))!
-                                ? "Products"
-                                : "Prodotti",
+                        : Text(getTextLanguage("products", (Settings.getValue<int>("lang", defaultValue: 0))!),
                             style: const TextStyle(
                               fontFamily: 'Overpass',
                             )),

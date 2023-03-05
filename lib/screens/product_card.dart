@@ -27,7 +27,7 @@ class _ProductCardState extends State<ProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
+    langI = (Settings.getValue<int>("lang", defaultValue: 0))!;
     priceI = (Settings.getValue<int>("usedValue", defaultValue: 0))!;
 
     return GestureDetector(

@@ -3,6 +3,7 @@ import 'home_screen.dart';
 import 'cart.dart';
 import 'settings.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import '../utils/i18n.dart';
 
 var appBarColor = 0xff2155A2;
 var primaryColor = 0xFFFFFFFF;
@@ -50,15 +51,15 @@ class _AppState extends State<App> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: const Icon(Icons.square),
-            label: (Settings.getValue<bool>("language", defaultValue: false))! ? 'Products' : "Prodotti",
+            label: getTextLanguage("appBar1", (Settings.getValue<int>("lang", defaultValue: 0))!),
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.shopping_cart),
-            label: (Settings.getValue<bool>("language", defaultValue: false))! ? 'Cart' : "Carrello",
+            label: getTextLanguage("appBar2", (Settings.getValue<int>("lang", defaultValue: 0))!),
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.settings),
-            label: (Settings.getValue<bool>("language", defaultValue: false))! ? 'Settings' : "Impostazioni",
+            label: getTextLanguage("appBar3", (Settings.getValue<int>("lang", defaultValue: 0))!),
           ),
         ],
       ),

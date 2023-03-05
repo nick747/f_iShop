@@ -42,19 +42,24 @@ class _SettingsPageState extends State<SettingsPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text(
-            getTextLanguage("settingsTitle", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
+            getTextLanguage("settingsTitle",
+                (Settings.getValue<int>("lang", defaultValue: 0))!),
             style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Overpass',
             ),
           ),
-          backgroundColor: (Settings.getValue<bool>('darkMode', defaultValue: false))! ? Color(secondaryColor) : Color(appBarColor),
+          backgroundColor:
+              (Settings.getValue<bool>('darkMode', defaultValue: false))!
+                  ? Color(secondaryColor)
+                  : Color(appBarColor),
         ),
         body: SafeArea(
           child: ListView(
             children: [
               SwitchSettingsTile(
-                title: getTextLanguage("settings1", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
+                title: getTextLanguage("settings1",
+                    (Settings.getValue<int>("lang", defaultValue: 0))!),
                 leading: const Icon(Icons.dark_mode),
                 defaultValue: false,
                 settingKey: 'darkMode',
@@ -64,7 +69,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SwitchSettingsTile(
-                title: getTextLanguage("settings2", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
+                title: getTextLanguage("settings2",
+                    (Settings.getValue<int>("lang", defaultValue: 0))!),
                 leading: const Icon(Icons.style),
                 defaultValue: true,
                 settingKey: 'material3',
@@ -73,25 +79,35 @@ class _SettingsPageState extends State<SettingsPage> {
                   widget.notifySettingsChange();
                 },
               ),
-              SwitchSettingsTile(
-                title: getTextLanguage("settings3", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
-                leading: const Icon(Icons.language),
-                defaultValue: false,
-                settingKey: 'language',
+              DropDownSettingsTile<int>(
+                settingKey: 'lang',
+                title: getTextLanguage("settings4title",
+                    Settings.getValue<int>("lang", defaultValue: 0)!),
+                selected: 0,
+                values: <int, String>{
+                  0: getTextLanguage("settings4a",
+                      Settings.getValue<int>("lang", defaultValue: 0)!),
+                  1: getTextLanguage("settings4b",
+                      Settings.getValue<int>("lang", defaultValue: 0)!),
+                },
                 onChange: (value) {
                   setState(() {});
                   widget.notifySettingsChange();
                 },
               ),
-              RadioSettingsTile<int>(
-                title: getTextLanguage("settings4Title", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
+              DropDownSettingsTile<int>(
+                title: getTextLanguage("settings5title",
+                    (Settings.getValue<int>("lang", defaultValue: 0))!),
                 settingKey: 'usedValue',
                 values: <int, String>{
-                  0: getTextLanguage("settings4a", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
-                  1: getTextLanguage("settings4b", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
-                  2: getTextLanguage("settings4c", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
+                  0: getTextLanguage("settings5a",
+                      (Settings.getValue<int>("lang", defaultValue: 0))!),
+                  1: getTextLanguage("settings5b",
+                      (Settings.getValue<int>("lang", defaultValue: 0))!),
+                  2: getTextLanguage("settings5c",
+                      Settings.getValue<int>("lang", defaultValue: 0)!),
                 },
-                selected: 0,
+                selected: 1,
                 onChange: (value) {
                   setState(() {});
                   widget.notifySettingsChange();
