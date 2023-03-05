@@ -1,6 +1,7 @@
 import 'package:ecommerce_flutter_app/screens/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import '../utils/i18n.dart';
 
 class SettingsPage extends StatefulWidget {
   final Function() notifySettingsChange;
@@ -41,7 +42,7 @@ class _SettingsPageState extends State<SettingsPage> {
       home: Scaffold(
         appBar: AppBar(
           title: Text(
-            (Settings.getValue<bool>("language", defaultValue: false))! ? "Settings" : "Impostazioni",
+            getTextLanguage("settingsTitle", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
             style: const TextStyle(
               color: Colors.white,
               fontFamily: 'Overpass',
@@ -53,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: ListView(
             children: [
               SwitchSettingsTile(
-                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "Dark Mode" : "Modalità Scura",
+                title: getTextLanguage("settings1", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
                 leading: const Icon(Icons.dark_mode),
                 defaultValue: false,
                 settingKey: 'darkMode',
@@ -63,7 +64,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SwitchSettingsTile(
-                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "Modern Style" : "Stile Moderno",
+                title: getTextLanguage("settings2", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
                 leading: const Icon(Icons.style),
                 defaultValue: true,
                 settingKey: 'material3',
@@ -73,7 +74,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               SwitchSettingsTile(
-                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "English" : "Inglese",
+                title: getTextLanguage("settings3", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
                 leading: const Icon(Icons.language),
                 defaultValue: false,
                 settingKey: 'language',
@@ -83,12 +84,12 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               RadioSettingsTile<int>(
-                title: (Settings.getValue<bool>("language", defaultValue: false))! ? "Currency Used" : "Valuta Utilizzata",
+                title: getTextLanguage("settings4Title", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
                 settingKey: 'usedValue',
                 values: <int, String>{
-                  0: (Settings.getValue<bool>("language", defaultValue: false))! ? "\$ Dollars" : "\$ Dollari",
-                  1: (Settings.getValue<bool>("language", defaultValue: false))! ? "€ Euros" : "€ Euro",
-                  2: (Settings.getValue<bool>("language", defaultValue: false))! ? "£ Pounds" : "£ Sterline",
+                  0: getTextLanguage("settings4a", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
+                  1: getTextLanguage("settings4b", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
+                  2: getTextLanguage("settings4c", (Settings.getValue<bool>("language", defaultValue: false))! ? 0 : 1),
                 },
                 selected: 0,
                 onChange: (value) {

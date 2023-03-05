@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import './app.dart';
 import '../models/product.dart';
 import 'product_card.dart';
+import '../utils/i18n.dart';
 
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'settings.dart';
@@ -64,10 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         content: Text(
-                          (Settings.getValue<bool>("language",
-                                  defaultValue: false))!
-                              ? "Click on a product for more information. To save it, click on the star button. To filter your products, click on the star at the top right of the main screen."
-                              : 'Clicca su un prodotto per avere più informazioni. Per salvarlo, clicca sul pulsante con la stella. Per filtrare i tuoi prodotti clicca sulla stellina in alto a destra nella schermata principale.',
+                          getTextLanguage(
+                              "helpMessage",
+                              (Settings.getValue<bool>("language",
+                                      defaultValue: false))!
+                                  ? 1
+                                  : 0),
                           style: const TextStyle(
                             fontFamily: 'Overpass',
                           ),
@@ -75,7 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         actions: <Widget>[
                           ElevatedButton(
                             child: Text(
-                              (Settings.getValue<bool>("language", defaultValue: false))!
+                              (Settings.getValue<bool>("language",
+                                      defaultValue: false))!
                                   ? "Close"
                                   : "Chiudi",
                               style: const TextStyle(
@@ -108,13 +112,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     showStarred
                         ? Text(
-                            (Settings.getValue<bool>("language", defaultValue: false))! ? "Favourites" : "Preferiti",
+                            (Settings.getValue<bool>("language",
+                                    defaultValue: false))!
+                                ? "Favourites"
+                                : "Preferiti",
                             style: const TextStyle(
                               fontFamily: 'Overpass',
                             ),
                           )
                         : Text(
-                            (Settings.getValue<bool>("language", defaultValue: false))! ? "Products" : "Prodotti",
+                            (Settings.getValue<bool>("language",
+                                    defaultValue: false))!
+                                ? "Products"
+                                : "Prodotti",
                             style: const TextStyle(
                               fontFamily: 'Overpass',
                             )),

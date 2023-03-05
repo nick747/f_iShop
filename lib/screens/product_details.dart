@@ -1,9 +1,13 @@
 import 'package:ecommerce_flutter_app/models/product.dart';
 import 'package:ecommerce_flutter_app/screens/app.dart';
+import 'package:ecommerce_flutter_app/screens/cart.dart';
 import 'package:flutter/material.dart';
 import '../models/cart_list.dart';
+import '../utils/i18n.dart';
+
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import '../screens/settings.dart';
+
 
 var langI = 0;
 var priceI = 0;
@@ -103,7 +107,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             padding: const EdgeInsets.all(10),
                             child: Center(
                               child: Text(
-                                '${widget.product.price[priceI]}',
+                                '${widget.product.price[priceI].round()}',
                                 style: const TextStyle(
                                   fontSize: 50,
                                   color: Color(0xff06D6A0),
@@ -248,17 +252,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         return AlertDialog(
           title: Text(language ? "Purchase completed" : "Acquisto completato"),
           content: Text(
-            language
-                ? ((value == 0)
-                    ? "You've spent \$${widget.product.price[priceI]}"
-                    : ((value == 1)
-                        ? "You've spent €${widget.product.price[priceI]}"
-                        : "You've spent £${widget.product.price[priceI]}"))
-                : ((value == 0)
-                    ? "Hai speso \$${widget.product.price[priceI]}"
-                    : ((value == 1)
-                        ? "Hai speso €${widget.product.price[priceI]}"
-                        : "Hai speso £${widget.product.price[priceI]}")),
+            getTextLanguage("promtMessage", language ? 1 : 0) + curPrices(priceI) + (widget.product.price[priceI].round()).toString(),
           ),
           actions: [
             TextButton(
