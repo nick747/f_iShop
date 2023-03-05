@@ -89,6 +89,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       Settings.getValue<int>("lang", defaultValue: 0)!),
                   1: getTextLanguage("settings4b",
                       Settings.getValue<int>("lang", defaultValue: 0)!),
+                  2: getTextLanguage("settings4c",
+                      Settings.getValue<int>("lang", defaultValue: 0)!),
                 },
                 onChange: (value) {
                   setState(() {});
