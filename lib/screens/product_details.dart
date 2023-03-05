@@ -24,13 +24,8 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
-    if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 1) {
-      priceI = 1;
-    } else if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 2) {
-      priceI = 2;
-    } else {
-      priceI = 0;
-    }
+    priceI = (Settings.getValue<int>("usedValue", defaultValue: 0))!;
+
     return MaterialApp(
       theme: darkMode
           ? ThemeData.dark(
@@ -108,7 +103,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             padding: const EdgeInsets.all(10),
                             child: Center(
                               child: Text(
-                                '${price[priceI]?[widget.product.price]}',
+                                '${widget.product.price[priceI]}',
                                 style: const TextStyle(
                                   fontSize: 50,
                                   color: Color(0xff06D6A0),
@@ -136,7 +131,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             ),
                             padding: const EdgeInsets.all(12.00),
                             child: Text(
-                              "${description[langI]?[widget.product.description]}",
+                              widget.product.description[langI],
                               style: TextStyle(
                                 fontSize: 18,
                                 color: darkMode
@@ -255,15 +250,15 @@ class _ProductDetailsState extends State<ProductDetails> {
           content: Text(
             language
                 ? ((value == 0)
-                    ? "You've spent \$${price[priceI]?[widget.product.price]}"
+                    ? "You've spent \$${widget.product.price[priceI]}"
                     : ((value == 1)
-                        ? "You've spent €${price[priceI]?[widget.product.price]}"
-                        : "You've spent £${price[priceI]?[widget.product.price]}"))
+                        ? "You've spent €${widget.product.price[priceI]}"
+                        : "You've spent £${widget.product.price[priceI]}"))
                 : ((value == 0)
-                    ? "Hai speso \$${price[priceI]?[widget.product.price]}"
+                    ? "Hai speso \$${widget.product.price[priceI]}"
                     : ((value == 1)
-                        ? "Hai speso €${price[priceI]?[widget.product.price]}"
-                        : "Hai speso £${price[priceI]?[widget.product.price]}")),
+                        ? "Hai speso €${widget.product.price[priceI]}"
+                        : "Hai speso £${widget.product.price[priceI]}")),
           ),
           actions: [
             TextButton(

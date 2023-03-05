@@ -226,7 +226,7 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
                     bottomRight: Radius.circular(10))),
             child: Center(
               child: Text(
-                "${curPrices(priceI)}${sumPrices(priceI).round()}",
+                "${curPrices(priceI)}${sumPricesList(cart, priceI).round()}",
                 style: const TextStyle(
                   fontSize: 50,
                   color: Colors.white,
@@ -240,16 +240,6 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
       ],
     );
   }
-}
-
-double sumPrices(int priceI) {
-  double sum = 0;
-
-  for (int i = 0; i < price.length; i++) {
-    sum += price[priceI]![i];
-  }
-
-  return sum;
 }
 
 

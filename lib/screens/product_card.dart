@@ -28,13 +28,8 @@ class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
-    if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 1) {
-      priceI = 1;
-    } else if ((Settings.getValue<int>("usedValue", defaultValue: 0))! == 2) {
-      priceI = 2;
-    } else {
-      priceI = 0;
-    }
+    priceI = (Settings.getValue<int>("usedValue", defaultValue: 0))!;
+
     return GestureDetector(
       onTap: () => widget.onTap != null ? widget.onTap!(widget.product) : null,
       child: Padding(
@@ -87,7 +82,7 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                     ),
                     Text(
-                      "${description[langI]?[widget.product.description]}",
+                      widget.product.description[langI],
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -111,7 +106,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   child: Center(
                     child: Text(
-                      '${curPrices(priceI)}${price[priceI]?[widget.product.price]}',
+                      "${curPrices(priceI)}${widget.product.price[priceI].round()}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
