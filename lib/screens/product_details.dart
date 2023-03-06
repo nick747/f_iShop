@@ -23,11 +23,10 @@ class _ProductDetailsState extends State<ProductDetails> {
   var darkMode = (Settings.getValue<bool>('darkMode', defaultValue: false))!;
   var material3 = (Settings.getValue<bool>('material3', defaultValue: true))!;
   var value = (Settings.getValue<int>('usedValue', defaultValue: 0))!;
-  var language = (Settings.getValue<bool>("language", defaultValue: false))!;
 
   @override
   Widget build(BuildContext context) {
-    langI = (Settings.getValue<bool>("language", defaultValue: false))! ? 1 : 0;
+    langI = (Settings.getValue<int>("lang", defaultValue: 0))!;
     priceI = (Settings.getValue<int>("usedValue", defaultValue: 0))!;
 
     return MaterialApp(
@@ -107,7 +106,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             padding: const EdgeInsets.all(10),
                             child: Center(
                               child: Text(
-                                '${widget.product.price[priceI].round()}',
+                                curPrices(priceI) + widget.product.price[priceI].round().toString(),
                                 style: const TextStyle(
                                   fontSize: 50,
                                   color: Color(0xff06D6A0),
@@ -188,14 +187,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               width: 10,
                             ),
                             Text(
-                              (Settings.getValue<bool>("language",
-                                      defaultValue: false))!
-                                  ? (widget.product.bought
-                                      ? "R E M O V E"
-                                      : "B U Y")
-                                  : (widget.product.bought
-                                      ? "R I M U O V I"
-                                      : "A C Q U I S T A"),
+                              widget.product.bought ? getTextLanguage("purchaseButton2", langI) : getTextLanguage("purchaseButton1", langI),
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -245,14 +237,14 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  acquisto(BuildContext context, int value, bool language) {
+  acquisto(BuildContext context, int value, int language) {
     showDialog(
       context: context,
       builder: ((context) {
         return AlertDialog(
-          title: Text(language ? "Purchase completed" : "Acquisto completato"),
+          title: Text(getTextLanguage("purchaseMessage", language)),
           content: Text(
-            getTextLanguage("promtMessage", language ? 1 : 0) + curPrices(priceI) + (widget.product.price[priceI].round()).toString(),
+            getTextLanguage("promtMessage", langI) + curPrices(priceI) + (widget.product.price[priceI].round()).toString(),
           ),
           actions: [
             TextButton(
@@ -271,9 +263,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         return AlertDialog(
           title: const Text("Rimozione Completata"),
           content: Text(
-                      language
-                          ? "You've removed ${widget.product.name} from your cart"
-                          : "Hai rimosso ${widget.product.name} dal tuo carrello",
+            getTextLanguage("refundMessage", langI) + widget.product.name + getTextLanguage("refundMessageB", langI),
                     ),
           actions: [
             TextButton(
@@ -286,7 +276,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   }
 
   aggiungi() {
-    acquisto(context, value, language);
+    acquisto(context, value, langI);
     cart.add(widget.product);
   }
 

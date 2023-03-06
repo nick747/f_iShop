@@ -9,6 +9,21 @@ var language = {
     "Click on a product for more information. To save it, click on the star button. To filter your products, click on the star at the top right of the main screen.",
     "Cliquez sur un produit pour plus d'informations. Pour l'enregistrer, cliquez sur le bouton étoile. Pour filtrer vos produits, cliquez sur l'étoile en haut à droite de l'écran principal.",
   ],
+  "refundMessage" : [
+    "Hai rimosso ",
+    "You've removed ",
+    "Vous avez supprimé ", 
+  ],
+  "refundMessageB": [
+    " dal tuo carrello",
+    " from your cart.",
+    " de votre chariot.",
+  ],
+  "purchaseMessage": [
+    "Acquisto completato.",
+    "Purchase Completed.",
+    "Achat terminé.",
+  ],
   "appBar1": [
     "Prodotti",
     "Products",
@@ -23,6 +38,16 @@ var language = {
     "Impostazioni",
     "Settings",
     "Paramètres",
+  ],
+  "purchaseButton1": [
+    "A C Q U I S T A",
+    "B U Y",
+    "A C H E T E R",
+  ],
+  "purchaseButton2": [
+    "R I M U O V I",
+    "R E M O V E",
+    "S U P P R I M E R",
   ],
   "products" : [
     "Prodotti",
