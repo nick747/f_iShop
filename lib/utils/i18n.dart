@@ -86,7 +86,7 @@ var language = {
   ],
   "settings4c": [
     "Francese",
-    "France",
+    "French",
     "Français"
   ],
 };
