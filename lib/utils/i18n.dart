@@ -30,7 +30,7 @@ var language = {
     "Produits",
   ],
   "appBar2": [
-    "Carrelo",
+    "Carrello",
     "Cart",
     "Chariot",
   ],
