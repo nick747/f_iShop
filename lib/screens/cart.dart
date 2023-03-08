@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:ecommerce_flutter_app/screens/product_details.dart';
+import 'package:ecommerce_flutter_app/utils/i18n.dart';
 import 'package:flutter/material.dart';
 import 'app.dart';
 import '../models/product.dart';
@@ -197,7 +198,7 @@ class _PrezzoCarrelloState extends State<PrezzoCarrello> {
                     ),
                   ),
                   Text(
-                    (Settings.getValue<bool>("language", defaultValue: false))! ? "Products" : 'Prodotti',
+                    getTextLanguage("appBar1", (Settings.getValue<int>("lang", defaultValue: 0))!),
                     style: const TextStyle(
                       fontSize: 15,
                       fontFamily: 'Overpass',
